@@ -1,0 +1,460 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{ynt/global//global/global/global}
+    \entry{holes-caws}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=b544f294dda6654238b96e5144b1d2b8}{%
+           family={Lekkeikerker},
+           familyi={L\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=48804e00f6501f011926f3a2facdf2c3}{%
+           family={Boland},
+           familyi={B\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \strng{namehash}{f751067ca9b343d88efff91814d2efb1}
+      \strng{fullhash}{f751067ca9b343d88efff91814d2efb1}
+      \strng{fullhashraw}{f751067ca9b343d88efff91814d2efb1}
+      \strng{bibnamehash}{f751067ca9b343d88efff91814d2efb1}
+      \strng{authorbibnamehash}{f751067ca9b343d88efff91814d2efb1}
+      \strng{authornamehash}{f751067ca9b343d88efff91814d2efb1}
+      \strng{authorfullhash}{f751067ca9b343d88efff91814d2efb1}
+      \strng{authorfullhashraw}{f751067ca9b343d88efff91814d2efb1}
+      \field{labelalpha}{LB62}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Fundamenta Mathematicae}
+      \field{number}{1}
+      \field{title}{Representation of a finite graph by a set of intervals on the real line}
+      \field{volume}{51}
+      \field{year}{1962}
+      \field{pages}{45\bibrangedash 64}
+      \range{pages}{20}
+      \verb{urlraw}
+      \verb http://eudml.org/doc/213681
+      \endverb
+      \verb{url}
+      \verb http://eudml.org/doc/213681
+      \endverb
+      \keyw{topology}
+    \endentry
+    \entry{inter-path}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=3e344e6adb502649042816704bfa34fa}{%
+           family={Fulkerson},
+           familyi={F\bibinitperiod},
+           given={D.\bibnamedelimi R.},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=e9c7cfad1223bacfd375387b4ab06e83}{%
+           family={Gross},
+           familyi={G\bibinitperiod},
+           given={O.\bibnamedelimi A.},
+           giveni={O\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Pacific Journal of Mathematics, A Non-profit Corporation}%
+      }
+      \strng{namehash}{96dc236a9a63f3f4875be87a877ee057}
+      \strng{fullhash}{96dc236a9a63f3f4875be87a877ee057}
+      \strng{fullhashraw}{96dc236a9a63f3f4875be87a877ee057}
+      \strng{bibnamehash}{96dc236a9a63f3f4875be87a877ee057}
+      \strng{authorbibnamehash}{96dc236a9a63f3f4875be87a877ee057}
+      \strng{authornamehash}{96dc236a9a63f3f4875be87a877ee057}
+      \strng{authorfullhash}{96dc236a9a63f3f4875be87a877ee057}
+      \strng{authorfullhashraw}{96dc236a9a63f3f4875be87a877ee057}
+      \field{labelalpha}{FG65}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Pacific Journal of Mathematics}
+      \field{number}{3}
+      \field{title}{{Incidence matrices and interval graphs.}}
+      \field{volume}{15}
+      \field{year}{1965}
+      \field{pages}{835\bibrangedash 855}
+      \range{pages}{21}
+    \endentry
+    \entry{NP-hard}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=c23d2c991b36d18d26bdbaa2d20e0bd8}{%
+           family={Krishnamoorthy},
+           familyi={K\bibinitperiod},
+           given={M.\bibnamedelimi S.},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=a10ccd3dc51fe442da4e59d030faac65}{%
+           family={Deo},
+           familyi={D\bibinitperiod},
+           given={Narsingh},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{173c262c86e51e533a3fab042bc7e27c}
+      \strng{fullhash}{173c262c86e51e533a3fab042bc7e27c}
+      \strng{fullhashraw}{173c262c86e51e533a3fab042bc7e27c}
+      \strng{bibnamehash}{173c262c86e51e533a3fab042bc7e27c}
+      \strng{authorbibnamehash}{173c262c86e51e533a3fab042bc7e27c}
+      \strng{authornamehash}{173c262c86e51e533a3fab042bc7e27c}
+      \strng{authorfullhash}{173c262c86e51e533a3fab042bc7e27c}
+      \strng{authorfullhashraw}{173c262c86e51e533a3fab042bc7e27c}
+      \field{labelalpha}{KD79}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The entire class of node-deletion problems can be stated as follows: Given a graph G, find the minimum number of nodes to be deleted so that the remaining subgraph g satisfies a specified property \$\pi \$. For each \$\pi \$, a distinct node-deletion problem arises. The various deletion problems considered here are for the following properties: each component of g is (i) null, (ii) complete, (iii) a tree, (iv) nonseparable, (v) planar, (vi) acyclic, (vii) bipartite, (viii) transitive, (ix) Hamiltonian, (x) outerplanar, (xi) degree-constrained, (xii) line invertible, (xiii) without cycles of a specified length, (xiv) with a singleton K-basis, (xv) transitively orientable, (xvi) chordal, and (xvii) interval. In this paper, these 17 different node-deletion problems are shown to be NP-complete. A unified approach is taken for the transformations employed in the proofs.}
+      \field{journaltitle}{SIAM Journal on Computing}
+      \field{number}{4}
+      \field{title}{Node-Deletion NP-Complete Problems}
+      \field{volume}{8}
+      \field{year}{1979}
+      \field{pages}{619\bibrangedash 625}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1137/0208049
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1137/0208049
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1137/0208049
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1137/0208049
+      \endverb
+    \endentry
+    \entry{aux2}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=5db7b92ac36b92505a52cbe66bcce4d6}{%
+           family={Tarjan},
+           familyi={T\bibinitperiod},
+           given={Robert\bibnamedelima E.},
+           giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=4c46d2f3f797a5dedce8a376cb13fe3a}{%
+           family={Yannakakis},
+           familyi={Y\bibinitperiod},
+           given={Mihalis},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{1db0ccb441985aa11ac669027b2f5f86}
+      \strng{fullhash}{1db0ccb441985aa11ac669027b2f5f86}
+      \strng{fullhashraw}{1db0ccb441985aa11ac669027b2f5f86}
+      \strng{bibnamehash}{1db0ccb441985aa11ac669027b2f5f86}
+      \strng{authorbibnamehash}{1db0ccb441985aa11ac669027b2f5f86}
+      \strng{authornamehash}{1db0ccb441985aa11ac669027b2f5f86}
+      \strng{authorfullhash}{1db0ccb441985aa11ac669027b2f5f86}
+      \strng{authorfullhashraw}{1db0ccb441985aa11ac669027b2f5f86}
+      \field{labelalpha}{TY84}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Chordal graphs arise naturally in the study of Gaussian elimination on sparse symmetric matrices; acyclic hypergraphs arise in the study of relational data bases. Rose, Tarjan and Lueker [SIAM J. Comput., 5 (1976), pp. 266--283] have given a linear-time algorithm to test whether a graph is chordal, which Yannakakis has modified to test whether a hypergraph is acyclic. Here we develop a simplified linear-time test for graph chordality and hypergraph acyclicity. The test uses a new kind of graph (and hypergraph) search, which we call maximum cardinality search A variant of the method gives a way to selectively reduce acyclic hypergraphs, which is needed for evaluating queries in acyclic relational data bases.}
+      \field{journaltitle}{SIAM Journal on Computing}
+      \field{number}{3}
+      \field{title}{Simple Linear-Time Algorithms to Test Chordality of Graphs, Test Acyclicity of Hypergraphs, and Selectively Reduce Acyclic Hypergraphs}
+      \field{volume}{13}
+      \field{year}{1984}
+      \field{pages}{566\bibrangedash 579}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1137/0213035
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1137/0213035
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1137/0213035
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1137/0213035
+      \endverb
+    \endentry
+    \entry{FPT-algos}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=4bff72c20aa17938333c75df4ea5413a}{%
+           family={Cai},
+           familyi={C\bibinitperiod},
+           given={Leizhen},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{4bff72c20aa17938333c75df4ea5413a}
+      \strng{fullhash}{4bff72c20aa17938333c75df4ea5413a}
+      \strng{fullhashraw}{4bff72c20aa17938333c75df4ea5413a}
+      \strng{bibnamehash}{4bff72c20aa17938333c75df4ea5413a}
+      \strng{authorbibnamehash}{4bff72c20aa17938333c75df4ea5413a}
+      \strng{authornamehash}{4bff72c20aa17938333c75df4ea5413a}
+      \strng{authorfullhash}{4bff72c20aa17938333c75df4ea5413a}
+      \strng{authorfullhashraw}{4bff72c20aa17938333c75df4ea5413a}
+      \field{labelalpha}{Cai96}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper is concerned with the fixed-parameter tractability of the problem of deciding whether a graph can be made into a graph with a specified hereditary property by deleting at most i vertices, at most j edges, and adding at most k edges, where i, j, k are fixed integers. It is shown that this problem is fixed-parameter tractable whenever the hereditary property can be characterized by a finite set of forbidden induced subgraphs. Furthermore, the problem of deciding whether a graph can be made into a chordal graph by adding a fixed number k of edges is shown to be solvable in O(4k(k + 1)− 32 (m + n)) time, and is thus fixed-parameter tractable.}
+      \field{issn}{0020-0190}
+      \field{journaltitle}{Information Processing Letters}
+      \field{number}{4}
+      \field{title}{Fixed-parameter tractability of graph modification problems for hereditary properties}
+      \field{volume}{58}
+      \field{year}{1996}
+      \field{pages}{171\bibrangedash 176}
+      \range{pages}{6}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0020-0190(96)00050-6
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0020019096000506
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0020019096000506
+      \endverb
+      \keyw{Design of algorithms,Graph algorithms,Fixed-parameter tractability,Graph modification problems}
+    \endentry
+    \entry{book}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=dac183376c5e200f082bb78aeb482df0}{%
+           family={Golumbic},
+           familyi={G\bibinitperiod},
+           given={Martin\bibnamedelima Charles},
+           giveni={M\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {NLD}%
+      }
+      \list{publisher}{1}{%
+        {North-Holland Publishing Co.}%
+      }
+      \strng{namehash}{dac183376c5e200f082bb78aeb482df0}
+      \strng{fullhash}{dac183376c5e200f082bb78aeb482df0}
+      \strng{fullhashraw}{dac183376c5e200f082bb78aeb482df0}
+      \strng{bibnamehash}{dac183376c5e200f082bb78aeb482df0}
+      \strng{authorbibnamehash}{dac183376c5e200f082bb78aeb482df0}
+      \strng{authornamehash}{dac183376c5e200f082bb78aeb482df0}
+      \strng{authorfullhash}{dac183376c5e200f082bb78aeb482df0}
+      \strng{authorfullhashraw}{dac183376c5e200f082bb78aeb482df0}
+      \field{labelalpha}{Gol04}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0444515305}
+      \field{title}{Algorithmic Graph Theory and Perfect Graphs (Annals of Discrete Mathematics, Vol 57)}
+      \field{year}{2004}
+    \endentry
+    \entry{aux1}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=5b3562b0f32fd18e197e049545720176}{%
+           family={Kratsch},
+           familyi={K\bibinitperiod},
+           given={Dieter},
+           giveni={D\bibinitperiod}}}%
+        {{hash=5d44ebe69d48937ed26c64912e7d12aa}{%
+           family={McConnell},
+           familyi={M\bibinitperiod},
+           given={Ross\bibnamedelima M.},
+           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=c2f239e3cf9c48b72ce5f4ca9b5e478e}{%
+           family={Mehlhorn},
+           familyi={M\bibinitperiod},
+           given={Kurt},
+           giveni={K\bibinitperiod}}}%
+        {{hash=c89acec326998f21b594bb5307b88d1a}{%
+           family={Spinrad},
+           familyi={S\bibinitperiod},
+           given={Jeremy\bibnamedelima P.},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{33e43e290226313676bdc0f8b229c1a6}
+      \strng{fullhash}{1cc04c4cc628a1a57c12a0fca021fde8}
+      \strng{fullhashraw}{1cc04c4cc628a1a57c12a0fca021fde8}
+      \strng{bibnamehash}{33e43e290226313676bdc0f8b229c1a6}
+      \strng{authorbibnamehash}{33e43e290226313676bdc0f8b229c1a6}
+      \strng{authornamehash}{33e43e290226313676bdc0f8b229c1a6}
+      \strng{authorfullhash}{1cc04c4cc628a1a57c12a0fca021fde8}
+      \strng{authorfullhashraw}{1cc04c4cc628a1a57c12a0fca021fde8}
+      \field{labelalpha}{Kra+06}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A certifying algorithm for a problem is an algorithm that provides a certificate with each answer that it produces. The certificate is a piece of evidence that proves that the answer has not been compromised by a bug in the implementation. We give linear-time certifying algorithms for recognition of interval graphs and permutation graphs, and for a few other related problems. Previous algorithms fail to provide supporting evidence when they claim that the input graph is not a member of the class. We show that our certificates of nonmembership can be authenticated in O(|V|) time.}
+      \field{journaltitle}{SIAM Journal on Computing}
+      \field{number}{2}
+      \field{title}{Certifying Algorithms for Recognizing Interval Graphs and Permutation Graphs}
+      \field{volume}{36}
+      \field{year}{2006}
+      \field{pages}{326\bibrangedash 353}
+      \range{pages}{28}
+      \verb{doi}
+      \verb 10.1137/S0097539703437855
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1137/S0097539703437855
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1137/S0097539703437855
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1137/S0097539703437855
+      \endverb
+    \endentry
+    \entry{linear_modules}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=6066eff0cae33630382b42ae0aa54ca0}{%
+           family={Habib},
+           familyi={H\bibinitperiod},
+           given={Michel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=27b57da5c1e6f6e165ba96b7a5d7b544}{%
+           family={Paul},
+           familyi={P\bibinitperiod},
+           given={Christophe},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{337d9f6943811c9dad66ab2d216bce9e}
+      \strng{fullhash}{337d9f6943811c9dad66ab2d216bce9e}
+      \strng{fullhashraw}{337d9f6943811c9dad66ab2d216bce9e}
+      \strng{bibnamehash}{337d9f6943811c9dad66ab2d216bce9e}
+      \strng{authorbibnamehash}{337d9f6943811c9dad66ab2d216bce9e}
+      \strng{authornamehash}{337d9f6943811c9dad66ab2d216bce9e}
+      \strng{authorfullhash}{337d9f6943811c9dad66ab2d216bce9e}
+      \strng{authorfullhashraw}{337d9f6943811c9dad66ab2d216bce9e}
+      \field{labelalpha}{HP10}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Modular decomposition is a technique that applies to (but is not restricted to) graphs. The notion of a module naturally appears in the proofs of many graph theoretical theorems. Computing the modular decomposition tree is an important preprocessing step to solve a large number of combinatorial optimization problems. Since the first polynomial time algorithm in the early 1970's, the algorithmic of the modular decomposition has known an important development. This paper survey the ideas and techniques that arose from this line of research.}
+      \field{issn}{1574-0137}
+      \field{journaltitle}{Computer Science Review}
+      \field{number}{1}
+      \field{title}{A survey of the algorithmic aspects of modular decomposition}
+      \field{volume}{4}
+      \field{year}{2010}
+      \field{pages}{41\bibrangedash 59}
+      \range{pages}{19}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.cosrev.2010.01.001
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S157401371000002X
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S157401371000002X
+      \endverb
+    \endentry
+    \entry{nor-Helly-char}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=3f2f41017f56b2de6c0b45190d1547d6}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Min\bibnamedelima Chih},
+           giveni={M\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=f101e0ea8dc1cd72a342fd17a2a18552}{%
+           family={Soulignac},
+           familyi={S\bibinitperiod},
+           given={Francisco\bibnamedelima J.},
+           giveni={F\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=17384dcc84c22b08ffa5c434f486881a}{%
+           family={Szwarcfiter},
+           familyi={S\bibinitperiod},
+           given={Jayme\bibnamedelima L.},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{ae3eb24fbc9fd0a4455cba4763309f83}
+      \strng{fullhash}{ae3eb24fbc9fd0a4455cba4763309f83}
+      \strng{fullhashraw}{ae3eb24fbc9fd0a4455cba4763309f83}
+      \strng{bibnamehash}{ae3eb24fbc9fd0a4455cba4763309f83}
+      \strng{authorbibnamehash}{ae3eb24fbc9fd0a4455cba4763309f83}
+      \strng{authornamehash}{ae3eb24fbc9fd0a4455cba4763309f83}
+      \strng{authorfullhash}{ae3eb24fbc9fd0a4455cba4763309f83}
+      \strng{authorfullhashraw}{ae3eb24fbc9fd0a4455cba4763309f83}
+      \field{labelalpha}{LSS13}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A Helly circular-arc model M=(C,A) is a circle C together with a Helly family A of arcs of C. If no arc is contained in any other, then M is a proper Helly circular-arc model, if every arc has the same length, then M is a unit Helly circular-arc model, and if there are no two arcs covering the circle, then M is a normal Helly circular-arc model. A Helly (resp. proper Helly, unit Helly, normal Helly) circular-arc graph is the intersection graph of the arcs of a Helly (resp. proper Helly, unit Helly, normal Helly) circular-arc model. In this article we study these subclasses of Helly circular-arc graphs. We show natural generalizations of several properties of (proper) interval graphs that hold for some of these Helly circular-arc subclasses. Next, we describe characterizations for the subclasses of Helly circular-arc graphs, including forbidden induced subgraphs characterizations. These characterizations lead to efficient algorithms for recognizing graphs within these classes. Finally, we show how these classes of graphs relate with straight and round digraphs.}
+      \field{issn}{0166-218X}
+      \field{journaltitle}{Discrete Applied Mathematics}
+      \field{number}{7}
+      \field{title}{Normal Helly circular-arc graphs and its subclasses}
+      \field{volume}{161}
+      \field{year}{2013}
+      \field{pages}{1037\bibrangedash 1059}
+      \range{pages}{23}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.dam.2012.11.005
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0166218X12004295
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0166218X12004295
+      \endverb
+      \keyw{Helly circular-arc graphs,Proper circular-arc graphs,Unit circular-arc graphs,Normal circular-arc graphs}
+    \endentry
+    \entry{main}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=ffbd440be3d518a696e50320511efbfa}{%
+           family={Cao},
+           familyi={C\bibinitperiod},
+           given={Yixin},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{ffbd440be3d518a696e50320511efbfa}
+      \strng{fullhash}{ffbd440be3d518a696e50320511efbfa}
+      \strng{fullhashraw}{ffbd440be3d518a696e50320511efbfa}
+      \strng{bibnamehash}{ffbd440be3d518a696e50320511efbfa}
+      \strng{authorbibnamehash}{ffbd440be3d518a696e50320511efbfa}
+      \strng{authornamehash}{ffbd440be3d518a696e50320511efbfa}
+      \strng{authorfullhash}{ffbd440be3d518a696e50320511efbfa}
+      \strng{authorfullhashraw}{ffbd440be3d518a696e50320511efbfa}
+      \field{labelalpha}{Cao14}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.DM}
+      \field{eprinttype}{arXiv}
+      \field{title}{Linear Recognition of Almost Interval Graphs}
+      \field{year}{2014}
+      \verb{eprint}
+      \verb 1403.1515
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1403.1515
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1403.1515
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

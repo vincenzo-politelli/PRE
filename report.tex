@@ -1,0 +1,2379 @@
+\documentclass{article}
+
+\usepackage{standalone}
+
+\addbibresource{../ref.bib}
+
+\title{Linear recognition of almost interval graphs}
+\author{Vincenzo Politelli \\ Supervisor: Prof. Chien-Chung Huang}
+\date{}
+
+\begin{document}
+
+    \maketitle
+    
+    \section{Introduction and first definitions}
+   
+    In this report,
+    we are going to provide
+    a pedagogical presentation
+    of the vertex deletion algorithm
+    for interval graphs presented in \cite{main}.
+    
+    First of all, 
+    we introduce the notation we will
+    adopt in this text.
+    Given a graph $G$ we
+    are going to denote
+    its set of vertices (resp. edges)
+    by $V\left(G\right)$
+    (resp. $E\left(G\right)$).
+    We also denote $\left|V\left(G\right)\right|$ 
+    by $\left|G\right|$ and
+    $\left|E\left(G\right)\right|$
+    by $\|G\|$.
+    Given a vertex $v$ of
+    $G$ we will denote its
+    closed (resp. open)
+    neighborhood in $G$ 
+    by $N\left[v\right]$ 
+    (resp. $N\left(v\right)$).
+    We say that a vertex
+    $v$ of $G$ is simplicial
+    when $N\left[v\right]$ 
+    induces a clique in $G$.
+    We will denote the set
+    of simplicial vertices of $G$ 
+    by $S\left(G\right)$.
+
+    We now introduce the 
+    notion of interval graph.
+
+    \begin{defn}
+        We say that a graph $G$
+        is interval if there 
+        exists a family of intervals
+        $\mathcal{I} = \left(I_{v}\right)_{v \in V\left(G\right)}$
+         such that
+         for all $u, v \in I_{v}$,
+         $u \sim v$ if and only if
+         $I_{u} \cap I_{v}$.
+         The family $I$ is called
+         an \emph{interval model}
+         of $G$.
+    \end{defn}
+
+    Throughout this text,
+    we will mostly assume
+    without loss of generality
+    that, when providing
+    an interval model of a graph,
+    all intervals are closed
+    and bounded and all their
+    non-empty intersections
+    are not singletons.
+
+    As proved in \cite{holes-caws},
+    interval graphs
+    are exactly
+    the hole-free graphs
+    (also known as chordal graphs)
+    which do not have
+    asteroidal triples.
+    We remind that a hole is a
+    chordless cycle and an
+    asteroidal triple (from 
+    now on ``at'')
+    is a triple of vertices
+    $\left\{x, y, z\right\}$ 
+    such that for all
+    couple of vertices in
+    the said triple, 
+    there exists a path
+    connecting them
+    that avoids the neighbours
+    of the third one.
+    The authors of \cite{holes-caws},
+    went further in identifying
+    the minimal chordal graphs
+    (under the operation
+    of taking iduced subgraphs)
+    containing an at.
+    Such graphs are shown in
+    Figure \ref{caws} and are called
+    minimal chordal asteroidal
+    witnesses, caws for short.
+    All in all, holes and caws
+    are the minimal forbidden
+    induced subgraphs for 
+    interval graphs.
+    We will denote the set of
+    holes and caws by $\mathcal{F}_{I}$.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{../caws.pdf}
+        \caption{Minmimal chordal asteroidal witnesses (caws)}
+        \label{caws}
+    \end{figure}
+
+
+    We now provide some
+    terminology for caws.
+    The vertices of caws
+    which are colored in
+    Figure \ref{caws} are called
+    \emph{terminals},
+    those which are
+    colored in green
+    are called
+    \emph{shallow terminals}.
+    When dealing
+    with $\dagger_{d}$ or
+    $\ddagger_{d}$,
+    the set of vertices
+    $\left\{l, b_1, c_1, c_2, s, b_d, r\right\}$
+    (where $c_1$ and $c_2$ are
+    identified in the case of $\dagger_{d}$)
+    is called \emph{frame} of the caw,
+    whereas the $b_1 - b_{d}$
+    path is called the \emph{base}
+    of the caw.
+
+    Associated to the family 
+    of interval graphs is the
+    family of \emph{locally} interval
+    graphs. That is, the family
+    characterized by the set of forbidden
+    induces subgraphs
+    composed of holes
+    of six or more vertices
+    and caws which are
+    not $\dagger_{d}$ or
+    $\ddagger_{d}$ with
+    $d \geq 3$.
+    We will denote
+    this new family of
+    forbidden induced
+    subgraphs by
+    $\mathcal{F}_{LI}$.
+    The holes which
+    are contained
+    in $\mathcal{F}_{LI}$ 
+    are called \emph{short}
+    holes, those which
+    are not are called
+    \emph{long} holes;
+    the caws which
+    are contained
+    in $\mathcal{F}_{LI}$ 
+    are called \emph{small} 
+    caws and those
+    which are not
+    are called \emph{large}
+    caws.
+
+    One last family 
+    of graphs that we
+    will need is that
+    of normal and Helly 
+    circular-arc graphs.
+    Similarly to interval
+    graphs, circular-arcs
+    graphs are those
+    graphs which
+    are represented
+    by a \emph{circular arc 
+    model} $\mathcal{A} = \left(A_{v}\right)_{v \in V\left(G\right)}$
+    where $A_{v} = \left[l_{v}, r_{v}\right]$
+    represents a closed arc
+    with $l_{v}$ and $r_{v}$ respectively
+    the counterclockwise and clockwise
+    ends of the arc. We also
+    assume $l_{v}, r_{v} > 0$ and
+    so, $l_{v} > r_{v}$ in case
+    the arc passes through the point $0$.
+    Circular-arc graphs, however, 
+    are far less understood than 
+    interval graphs because of
+    some pathological cases.
+    This motivates the definition of
+    normal and Helly circular-arc
+    graphs.
+
+    \begin{defn}
+        A graph $G$ is
+        a normal and Helly circular-arc
+        graph if for all
+        circular-arc models
+        of $G$,
+        no two arcs intersect 
+        at both ends and
+        no three arcs 
+        pairwise intersect without
+        sharing a common point.
+    \end{defn}
+
+    An important characterisation
+    of normal and Helly circular-arc
+    graphs is provided by \cite{nor-Helly-char}.
+    We have that a graph $G$ is a normal
+    and Helly circular-arc graph
+    if and only if for all
+    circular-arc models of $G$ 
+    no three or less arcs cover the
+    whole circle.
+
+    \section{Vertex deletion problems that are FPT}
+    
+    The question we would like to 
+    answer in this text is that of
+    finding an optimal way of modifying
+    a given graph into an interval graph.
+    This problem is a special case 
+    of a large and important family of problems
+    that we are going to describe.
+
+    \begin{defn}
+        Let $\mathcal{C}$ be a class of graphs.
+        \begin{itemize}
+            \item If $\mathcal{C}$ has the property that, for any $G \in \mathcal{C}$,
+                any induced subgraph of $G$ is also in $\mathcal{C}$,
+                then we say that $\mathcal{C}$ is a hereditary property.
+            \item If there exists a family $\mathcal{F}$ such that
+                a graph $G \in \mathcal{C}$ if and only if $G' \not \in \mathcal{F}$
+                for any induced subgraph $G'$ of $G$, then $\mathcal{C}$ 
+                is said to have a forbidden set characterization.
+                If, moreover, $\mathcal{F}$ is finite, $\mathcal{C}$ is 
+                said to have a finite forbidden set characterization.
+        \end{itemize}
+    \end{defn}
+
+    Notice that that of being an interval graph
+    is a hereditary property
+    and the class of interval
+    graphs has a (non-finite) forbidden
+    set characterization.
+        
+    Given a hereditary property $\mathcal{C}$,
+    a natural problem that arises
+    is the $\mathcal{C}$-\emph{graph modification problem}, 
+    that is, the problem of computing the minimum
+    number of vertices additions, edge additions or 
+    edge deletions needed to transform a given graph $G$ into
+    a graph in $\mathcal{C}$. 
+    Notice that the fact that $\mathcal{C}$ is 
+    a hereditary property
+    makes the edge addition problem trivial.
+    
+    From now on, we are only going 
+    to consider the vertex deletion problem. 
+    This is because, if a graph $G$ can be made
+    interval with $k_{+}$ edge additions
+    and $k_{-}$ edge deletions,
+    then it can be made so with $k_{+} + k_{-}$ 
+    vertex deletions.
+    Thus, knowing how to solve
+    the vertex deletion problem 
+    with $k$ deletions, we know
+    how to solve the edge addition
+    (resp. deletion) with $k$ 
+    additions (resp. deletions).
+
+    This kind of problems are hard in general, indeed, as proved in 
+    \cite{NP-hard}, the vertex deletion problem is NP-hard
+    for any non-trivial hereditary property.
+    This motivates the research for FPT or approximation 
+    schemes for the vertex-deletion problem. 
+    As proved in \cite{FPT-algos}, the
+    $\mathcal{C}$-vertex deletion problem
+    for a class $\mathcal{C}$ which has
+    a finite forbidden set
+    characterization is indeed
+    FPT in the maximum number of vertex deletions.
+    In what follows, we are presenting a proof of this fact.
+
+    If $\mathcal{C}$ has 
+    a finite forbidden set characterization,
+    let $\mathcal{F}$ be the set of forbidden induced subgraphs and
+    let $\nu$ the maximum number of vertices of a graph in $\mathcal{F}$.
+    Given a graph $G$ on $n$ vertices and $m$ edges,
+    we can check in $\mathcal{O} \left(n^{\nu}\right)$
+    whether $G$ belongs to the class $\mathcal{C}$.
+    Indeed, for each graph $F$ in $\mathcal{F}$ 
+    we can enumerate the functions from $V\left(F\right)$
+    to $V\left(G\right)$ which are at most $n^{\nu}$
+    and check in time $\mathcal{O} \left(\nu^{2}\right) = \mathcal{O}\left(1\right)$ whether
+    any of them is an isomorphism.
+
+    We get the following proposition.
+
+    \begin{prop} \label{FPT-prop_1} (\cite{FPT-algos})
+        For any hereditary property $\mathcal{C}$,
+        if $\mathcal{C}$ is recognizable
+        in time $T\left(n, m\right)$, with
+        $n$, $m$ respectively the number of nodes and edges
+        of the graph; then, for any $G \not \in \mathcal{C}$,
+        we can find a minimal forbidded induced
+        subgraph of $\mathcal{C}$ in G in time 
+        $\mathcal{O} \left(n \cdot T\left(n, m\right)\right)$.  \end{prop}
+    \begin{proof} 
+        Suppose that there exists an algorithm $M$ that tests
+        the membership of its argument $G$ in $\mathcal{C}$ in time
+        $T\left(n, m\right)$.
+        We first provide an algorithm and then prove its correcteness
+        and time complexity.
+
+        \begin{algorithm} \label{forbid subgraph}
+            \caption{Minimal forbidden induced subgraph}
+            \KwIn{An graph $G$ and a hereditary property $\mathcal{C}$.}
+            \KwOut{An (inclusion-wise) minimal forbidden
+            induced subgraph of $G$, otherwise the empty graph.}
+           
+            \SetKw{choose}{choose}
+
+            $F \gets \emptyset$\;
+            $V \gets V\left(G\right)$\;
+            \While{$M\left(G\right)$ = ``False''}{
+                \choose any vertex $v \in V$\;
+                \If{$M\left(G - v\right)$}{
+                    $F \gets F \cup \left\{v\right\}$\;
+                } 
+                \Else{
+                    $G \gets G - v$\;
+                }
+            }
+            \KwRet{$G\left[F\right]$}.
+        \end{algorithm}
+    The proof of the time complexity is clear.  
+    The correctness follows from the fact that if
+    $M\left(G\right) = \text{``False''}$ and $M\left(G - v\right) = \text{``True''}$,
+    then $v$ is a node of an inclusion-wise minimal forbidden induced subgraph.
+    \end{proof}
+    
+    From this we get that Algorithm \ref{vertex deletion FPT}
+    is FPT and solves the vertex deletion problem. 
+    
+    \begin{algorithm} \label{vertex deletion FPT}
+        \caption{Vertex deletion problem}
+        \SetKw{branch}{branch}
+        \SetKw{find}{find}
+
+        \KwIn{A graph $G$ and a hereditary property $\mathcal{C}$ 
+              with a finite forbidden set characterization;
+              an integer $k$ representing the maximum number of
+              vertex deletions.}
+        \KwOut{``True'' if $G$ can be made into a graph in $\mathcal{C}$ 
+               in at most $k$ vertex deletions, ``False'' otherwise.}
+        $\texttt{count} \gets 0$\;
+        
+        \While{$\texttt{count} < k$}{
+            \find a minimal induced forbidden subgraph $H$ in $G$
+            with Algorithm \ref{forbid subgraph}\;
+            \If{$H$ is found}{
+                \branch on deleting a vertex from $H$\;
+            }
+            \Else{
+                \KwRet{``True''}\;
+            }
+            $\texttt{count++}$\;
+        }
+        \KwRet{``False''}.
+    \end{algorithm}
+
+    We analise the algorithm.
+    Given a graph $G$ and a hereditary property $\mathcal{C}$ with
+    a finite forbidden set characterization, Proposition \ref{FPT-prop_1} and
+    the previous observations tell us that the total complexity of the 
+    algorithm, whose correctness is clear, is $\mathcal{O} \left(\nu^{k} \cdot n \cdot n^{\nu} \right)
+    = \mathcal{O} \left(\nu^{k} \cdot n^{\nu + 1}\right)$.
+    Which gives us the desired FPT algorithm.
+    
+    The class of interval graphs and many other important
+    graph classes such as trees and chordal graphs 
+    have the hereditary property but
+    do not have a finite
+    forbidden set characterization since they have arbitrarily big minimal
+    obstructions such as cycles. Interval graphs also have
+    very far less understood arbitrarily big minimal obstructions
+    such as caws. Therefore the approach of Algorithm \ref{vertex deletion FPT}
+    does not serve our purpose. Moreover, such algorithm is
+    also very inefficient on special cases such as interval graph.
+
+    One possible stategy to tackle this problem is the
+    so-called \emph{two-phase approach}.
+    That is, one first divides the class of forbidden
+    induced subgraphs into two disjoint classes $\mathcal{F} = \mathcal{F}_{B} \cup \mathcal{F}_{U}$
+    such that $\mathcal{F}_{B}$ contains some 
+    selected minimal obstructions
+    and $\mathcal{F}_{U}$ contains
+    the rest of the graphs in $\mathcal{F}$.
+    We are going to call the graphs in $\mathcal{F}_{B}$ 
+    the \emph{small} obstructions and the graphs in $\mathcal{F}_{U}$ 
+    the \emph{large} obstructions. 
+    Phase 1 consists of disposing of small obstructions while,
+    in phase 2, we get rid of large 
+    ones, exploiting combinatorial properties of the graphs
+    which lack small forbidden induced subgraphs.
+
+    One example of this two-phase approach is
+    that of the algorithm provided in \cite{aux1}.
+    It is a linear time algorithm for detecting a hole
+    or an at form a non-interval graph.
+    It first calls the linear time hole detection algorithm
+    described in \cite{aux2} (phase 1). 
+    This either returns
+    a hole, or reduces the problem to finding an at in a 
+    chordal graph (phase 2).
+    As noted in \cite{main}, we can 
+    turn the algorithm from
+    \cite{aux1} into a linear time 
+    algorithm which returns either
+    a hole or a caw. We will
+    refer to this algorithm 
+    as $\texttt{find\_forbidden}\left(\cdot\right)$.
+    We will also be calling the
+    hole-detecting algorithm
+    in \cite{aux2}
+    $\texttt{find\_hole}\left(\cdot\right)$.
+
+    The problem of the two-phase approach is the fact that,
+    in general, small obstructions are not likely to
+    be found in linear time. 
+    Thus, the natural choice
+    of setting $\mathcal{F}_{B} \defeq \mathcal{F}_{LI}$
+    and carry out the two-phase
+    approach described above
+    does not lead to optimal
+    results.
+    In order to achieve linear
+    time in the interval vertex deletion problem
+    we relax phase 1 to either disposing of
+    an induced subgraph of $G$ in $\mathcal{F}_{LI}$
+    or finding a certain clique decomposition
+    of $G$ which allows us to remove
+    the remaining obstructions.
+    As an important note on what
+    follows, we remark
+    that whenever we
+    find an induced subgraph of $G$ 
+    in $\mathcal{F}_{LI}$ 
+    during the execution
+    of the vertex deletion
+    algorithm, we immediately
+    branch on deleting one vertex of it.
+
+    We finally note that
+    both Algorithm \ref{vertex deletion FPT}
+    and the vertex deletion algorithm in \cite{main}
+    pose themselves the constraint
+    of modifying the input graph
+    with at most $k$ modifications.
+    What they do in practice, however,
+    is to find the minimal number
+    of modifications needed so that
+    the input graph falls into the
+    desired class if such number
+    does not exceed $k$, or otherwise
+    return ``False''.
+    
+    Thus, we assume 
+    without loss of generality
+    that the input graph
+    $G$ does not contain
+    any universal vertices.
+    Indeed, if it does, 
+    we can strip them off,
+    because any minimal
+    modification of $G$ 
+    into an interval graph
+    does not include
+    universal vertices.
+    To see why this is true,
+    suppose that there is a 
+    universal vertex $u$ into 
+    a minimal set $S$ of 
+    vertices to be deleted
+    to make $G$ into an
+    interval graph $G_{I}$.
+    $G_{I}$ has an interval
+    model $\mathcal{I} = \left(I_{v}\right)_{v \in V\left(G_{I}\right)}$.
+    Adding the interval
+    $\bigcup_{v \in V\left(G_{I}\right)} I_{v}$
+    to $\mathcal{I}$ gives
+    an interval model
+    of $G \setminus \left(S \setminus \left\{u\right\}\right)$
+    which contradicts
+    the minimality of
+    $S$.
+    
+    \section{Modules}
+
+    One important notion behind
+    the vertex deletion algorithm in
+    \cite{main} is that of
+    the module of a graph. 
+
+    \begin{defn}
+        Given a graph $G$, a set $M \subseteq V\left(G\right)$
+        is a module if all $v \in M$ have
+        the same neighborhood outside $M$.
+        We call all singletons and $V\left(G\right)$
+        \emph{trivial} modules.
+        
+        $G$ is said to be
+        \emph{prime} if
+        it only has trivial modules.
+
+        A module $M$ is said to 
+        be \emph{strong} if for all modules
+        $M'$ that intersect $M$,
+        either $M \subseteq M'$ or
+        $M' \subseteq M$.
+
+        Also, a module $M$ is \emph{maximal} if 
+        the only module of $G$ properly
+        containing it is $V\left(G\right)$.
+    \end{defn}
+    
+    We provide some observations.
+    One can check by hand
+    that the $4$-hole is the
+    only non-prime
+    graph in $\mathcal{F}_{I}$.
+
+    Notice that prime graphs with 
+    at least one edge are always
+    connected. Otherwise, any
+    of it's connected components
+    with at least two vertices
+    would form a non-trivial module
+    of such graph.
+    
+    Notice that two modules of a graph
+    $G$ are either non-adjacent 
+    or completely adjacent.
+
+    We also immediately see that two modules
+    which are both strong and maximal
+    are disjoint. Moreover, since
+    singletons are strong, every vertex
+    $v$ appears in one maximal strong
+    module. These observations give
+    the following propositions.
+
+    \begin{prop}
+        The maximal strong modules of
+        a graph $G$ define a partition
+        of its vertices.
+    \end{prop}
+
+    Thus, maximal strong modules
+    of $G$ define an equivalence
+    relation on its vertices.
+    Morever, since two modules
+    are either non-adjacent
+    or completely adjacent, 
+    the maximal strong modules
+    of a graph $G$ define a
+    quotient graph $Q\left(G\right)$ 
+    whose nodes are the maximal 
+    strong modules of $G$
+    which are connected in $Q\left(G\right)$ 
+    if and only if they are
+    completely adjacent in $G$.
+    
+    For our purposes, an important
+    property of maximal strong modules,
+    is that we can find them in linear
+    time (see \cite{linear_modules}).
+    Thus, they can be used for algorithmic
+    purposes.
+    We denote the linear-time
+    subroutine computing
+    $Q$ by $\texttt{compute\_quotient}\left(\cdot\right)$.
+
+    We immediately see that
+    if $G$ is not connected, its 
+    maximal strong modules are
+    its connected components. 
+    Thus, $Q\left(G\right)$ is
+    an edgeless graph.
+    Likewise,
+    if the complement of $G$,
+    which we call $\overline{G}$, is
+    not connected, we get
+    that $Q\left(G\right)$ is 
+    a complete graph. In general, 
+    it holds that
+    $G$ and $\overline{G}$ 
+    have the same set of maximal
+    strong modules
+    and $Q\left(\overline{G}\right) = \overline{Q\left(G\right)}$. 
+
+    If neither $G$
+    nor $\overline{G}$ are
+    connected, we have the following
+    proposition.
+
+    \begin{prop} \label{prime quotient}
+        If $G$ and its complement are connected, 
+        then the quotient graph  $Q$ whose vertex set is
+        a set of maximum strong modules that partition $V\left(G\right)$ is prime.
+    \end{prop}
+    \begin{proof}
+        Given a module $M$, let $\Gamma\left(M\right)$ denote
+        the set of neighbors of the vertices of $M$ 
+        which do not lie in $M$.
+        Given a graph  $G$, let  $Q\left(G\right)$ denote
+        its quotient graph  where the chosen partition of
+        $V\left(G\right)$ is made of maximum strong modules.
+        Notice that $G$ is connected if and only if $Q\left(G\right)$ is.
+        Finally, let $\overline{G}$ be the complement of $G$.
+
+        Now, suppose that $G$ and $\overline{G}$ are connected.
+        Let $M = \left\{M_1, M_2, \ldots, M_{p}\right\}$
+        be the maximum strong modules that form a partition of $V\left(G\right)$
+        and let $Q\left(G\right)$ be the associated quotient graph.
+        Suppose that $Q\left(G\right)$ contains a non-trivial module
+        $\mu_1 \subseteq M$. Since the set $L_1 = \bigcup_{M_{i} \in \mu_{i}}$
+        is a module in $G$ and $M_{i} \subseteq L_1$ for some $i$,
+        we have that $L_1$ is not a strong module of G
+        by the maximality of the modules in $M$.
+
+        Therefore, there exists a module $L_1' \subseteq V\left(G\right)$
+        such that $L_1' \cap L_1 \neq \emptyset$, 
+        but none of the two sets is included into the other.
+        Since the modules in $M$ are all strong,
+        we immediately have that $L_1'$ is the disjoint union of some modules in $M$.
+        Call the set of such modules $\mu_1'$.
+
+        We can see that $\mu_1'$ is a module in $Q\left(G\right)$ and 
+        $\mu_1 \cap \mu_1' \neq \emptyset$.
+        Moreover, $\mu_1$ and $\mu_1'$ are not comparable with inclusion.
+
+        Notice that $\mu_1 \cup \mu_1'$ must be a proper subset of $M$,
+        because, otherwise, any vertex in the intersection of
+        $\mu_1 \cap \mu_1'$ would be a disconnected component of 
+        $Q\left(\overline{G}\right)$,  which cannot be since 
+        $\overline{G}$ is connected.
+
+        If $\Gamma\left(\mu_1\right) \subseteq \mu_1'$, then $\mu_1 \cup \mu_1'$ 
+        would be a component of $Q\left(\overline{G}\right)$,
+        but this would mean that $Q\left(\overline{G}\right)$
+        has more than one connected component,
+        since $\mu_1 \cup \mu_1'$ is a proper subset
+        of $M$, as proved above. Therefore $\Gamma\left(\mu_1\right) \not \subseteq \mu_1'$.
+
+        All in all, we proved that $\mu_1 \cup \mu_1' \defeq \mu_2$
+        is a non-trivial module of $Q\left(G\right)$. 
+        We can do the same on $\mu_2$ recursively until we obtain that
+        $\mu_{l} \cup \Gamma\left(\mu_{l}\right)$ forms a partition of $M$ 
+        with $\mu_{l}$ a non-trivial module of $Q\left(G\right)$, 
+        and so $\Gamma\left(\mu_{l}\right) \neq \emptyset$.
+        But this means that $\Gamma\left(\mu_{l}\right)$ forms
+        a disconnected component of $Q\left(\overline{G}\right)$, which is a contradiction.
+        Thus, $Q\left(G\right)$ does not have any non-trivial modules.
+    \end{proof}
+    
+    We automatically have the following corollary.
+
+    \begin{cor}
+        Given a graph $G$, $Q\left(G\right)$
+        is either edgeless, complete or prime.
+    \end{cor}   
+    
+    One reason why
+    quotient graphs $Q\left(G\right)$
+    decided by maximal strong
+    modules of a graph $G$ 
+    are so useful, is
+    that, while $Q\left(G\right)$
+    is smaller that $G$, 
+    it still contains a some
+    useful information about
+    $G$ itself. We express
+    this fact through the following lemma.
+
+    \begin{lemma} \label{prime lemma}
+        Let $G$ and $Q\left(G\right)$
+        be defined as above.
+        Let $X$ be an
+        induced subgraph
+        of $G$. Then,
+        if $X$ is prime, either
+        it is contained into 
+        a maximal strong module
+        of $G$ or $X$ is 
+        an induced subgraph of $Q\left(G\right)$.
+
+        Conversely, if $X$ is any induced subraph of $Q\left(G\right)$,
+        then $X$ is also a induced subgraph of $G$.
+    \end{lemma}
+    \begin{proof}
+        For any maximal strong module $M$ of
+        $G$, the set $M' \defeq V\left(X\right) \cap M$
+        is a module of $X$. Therefore
+        it has to be either a singleton or
+        the entire $V\left(X\right)$.
+        In the latter case, $X$ is a subgraph
+        of $G\left[M\right]$.
+        In the former,
+        by the definition
+        of modularity
+        and by the fact
+        that maximal strong
+        modules partition
+        $V\left(X\right)$,
+        the maximal strong modules
+        intersecting $X$ induce a subgraph
+        in $Q\left(G\right)$ which is
+        isomorphic to $X$.
+
+        Conversely, if $X$ is 
+        an induced subgraph
+        in $Q\left(G\right)$,
+        we define 
+        $S$ to be the
+        set containing exactly
+        one representative of each
+        module of $G$ which is
+        also a vertex of $X$.
+        Then, by the definition
+        of $Q\left(G\right)$,
+        the induced
+        subgraph $G\left[S\right]$ 
+        is isomorphic to $X$.
+    \end{proof}
+
+    This lead us directly to
+    one of the main propositions 
+    of \cite{main}.
+    
+    \begin{prop} \label{main prop}
+        Let $* \in \left\{\text{I}, \text{LI}\right\}$. We have that
+        $G \in \mathcal{F}_{*}$ and does not have a universal vertex
+        if and only if all of the following holds.
+        \begin{enumerate}
+            \item The quotient graph $Q$ decided by maximal strong modules
+                is not a clique; \label{1}
+            \item $Q$ is in $\mathcal{F}_{*}$; \label{2}
+            \item $G[M] \in \mathcal{F}_{*}$ for all modules $M$ which are simplicial in $Q$; \label{3}
+            \item $G[M]$ is a clique for all modules $M$ which are non-simplicial in $Q$. \label{4}
+        \end{enumerate}
+    \end{prop}
+    \begin{proof}
+        We prove the forward direction by contraposition.
+        
+        Suppose that $Q$ is a clique. 
+        If there is a module $M$ deciding $Q$
+        which forms a clique in $G$, we have a universal vertex.
+        Thus, take two modules $M$ and $M'$ deciding $Q$ and consider
+        vertices $v_1, v_2 \in M$ and  $u_1, u_2 \in M'$ 
+        with $v_1 \not \sim v_2$ and $u_1 \not \sim u_2$.
+        This forms an induced $4$-hole.
+
+        Suppose that a quotient graph $Q$ decided my maximal strong
+        modules of $G$ is not in $\mathcal{F}_{*}$.
+        Then, there is a graph $H \in \mathcal{F}_{*}$ induced in $Q$.
+        Thus $H$ is an induced subgraph in $G$.
+
+        Suppose that $G[M] \not \in \mathcal{F}_{*}$ for some module $M$ 
+        which is simplicial in $Q$. Then $G[M]$ 
+        contains an induced graph $H \in \mathcal{F}_{*}$. Thus, so does $G$.
+
+        Suppose that $G\left[M\right]$ is not a clique for $M$ 
+        a non-simplicial vertex of $Q$.
+        Then, we get that $\left|M\right| \geq 2$ and that
+        there are $M_1$ and $M_2$ adjacent to $M$ in $Q$
+        such that $M_1$ and $M_2$ are not adjacent.
+        Take two non-adjacent $u_1, u_2 \in M$ and
+        any $v_1 \in M_1$ and $v_2 \in M_2$.
+        We have that $u_1, v_1, u_2, v_2$ form
+        an induced $4$-hole since $v_1$ and $v_2$ are
+        not adjacent in $G$.
+            
+        \vspace{5pt}
+
+        We prove the backward direction by contraposition.
+
+        Suppose that $G \not \in \mathcal{F}_{*}$ with $G$ with no universal vertices.
+        Thus, $Q$ is not a clique. This settles point \ref{1}.
+
+        Since $G \not \in \mathcal{F}_{*}$, $G$ has an induced subgraph $H \in \mathcal{F}_{*}$.
+        If $H$ is prime, i.e., $H$ is not a $4$-hole, 
+        then either $H$ is an induced subgraph in $Q$ or in one of the
+        modules deciding $Q$ (otherwise it would contradict the primality of $H$).
+        If $H$ is not prime, i.e. a  $4$-hole,
+        it either is completely
+        contained into one module or 
+        each vertex is contained into 
+        a different module (thus
+        settling point \ref{2} and \ref{3}),
+        or it is contained in two or three modules.
+        
+        In this last case notice that at least one module
+        contains exactly two non-adjacent vertices.
+        So it is not a clique module.
+        We also claim that at least two non-adjacent
+        vertices of the $4$-hole lie in a non-simplicial vertex.
+        Indeed, suppose that the vertices of the $4$-hole
+        lie in exactly three modules, then two of these
+        modules must contain
+        exactly one vertex of the $4$-hole
+        and must be non-adjacent
+        while being both adjacent to the
+        third one, which is thus non-simplicial. 
+        Otherwise, suppose that all the vertices of the $4$-hole, 
+        lie in exactly two modules $M_1$ and $M_2$.
+        If $M_1$ is simplicial, then there must be a module $M_3$
+        not adjacent to $M_1$, because otherwise, either Q is a
+        complete graph or $\left\{M_1, M_2\right\}$ forms a module
+        of $Q$, which is prime (since it is not a clique
+        nor it is edgless, since $M_1$ and $M_2$ are
+        adjacent),
+        a contradiction. 
+        Therefore $M_1$ and $M_3$ are not adjacent and
+        $M_2$ is not simplicial.
+        
+        We just found a non-simplicial vertex in $Q$
+        which contains two non-adjacent vertices, and thus
+        it is not a clique module. This settles point \ref{4}.
+    \end{proof}
+ 
+    Proposition \ref{main prop} tells us that,
+    if we ensure that
+    $G$ does not have universal
+    vertices, and
+    once $Q\left(G\right)$ is
+    compted by $\texttt{compute\_quotient}\left(G\right)$,
+    in order to ensure that
+    $G$ is interval,
+    we only need to check that 
+    $Q\left(G\right)$ is interval
+    itself,
+    non-simplicial modules are cliques and
+    that $G\left[M\right]$ is
+    an interval graph for all simplicial
+    modules $M$.
+
+    In order to
+    achive the minimal 
+    number of modifications
+    while enforcing
+    condition \ref{3}
+    of Proposition \ref{main prop},
+    we would like that,
+    if $G\left[M\right]$ is not
+    and interval graph, the
+    graph obtained by substituting
+    $G\left[M\right]$ by its
+    largest induced interval subgraph
+    is part of some minimum
+    of modifications required to
+    transform $G$ into an
+    interval graph.
+    This is indeed the case,
+    provided that $Q\left(G\right)$
+    is $4$-hole free.
+    Before proving so,
+    we fist make an observation.
+
+    Maximal strong modules
+    enjoy a remarkable ``modularity''
+    property.
+    Let $G$ be a graph such
+    that $Q\left(G\right)$ is
+    a prime graph. Let $M$ be
+    a module of $G$ and let
+    $H$ be a graph of
+    vertex set $M'$.
+    Consider replacing $G\left[M\right]$ 
+    by $H$ in such a way 
+    that $u \in V \left(G\right) \setminus M$
+    contained in the maximal
+    strong module $M'' \in V\left(Q\left(G\right)\right)$
+    and $v \in M'$ are
+    adjacent if and only if
+    $M$ and $M''$ are adjacent
+    in $V\left(Q\right)$.
+    Then we have the following.
+    
+    \begin{lemma} \label{for thm}
+        Consider the graph $G'$
+        obtained after replacing
+        $G\left[M\right]$ by $H$.
+        Then, $M'$ is a maximal
+        strong module of $G'$ 
+        and $Q\left(G\right)$
+        is isomorphic to
+        $Q\left(G'\right)$.
+    \end{lemma}
+    \begin{proof}
+    First, we notice that, by construction,
+    $M'$ and all the modules of $G$
+    except for $M$ are still modules of $G'$.
+    We are now going to prove that such modules
+    are stong and maximal in $G'$.
+    By abuse of notation,
+    we denote $V\left(Q\left(G\right)\right)$ 
+    by $V\left(Q\right)$
+    and $V\left(Q\left(G'\right)\right)$ 
+    by $V\left(Q'\right)$.
+
+    We first prove that they are strong by contradiction.
+    Let $X$ be a module of $G'$ such that $M' \cap X \neq \emptyset$
+    and $M' \not \subseteq X$ and $X \not \subseteq M$.
+    Let $\left\{M_1, M_2, \ldots, M_{p}\right\}$ be the set of maximal strong modules
+    in $V\left(Q\right)$ such 
+    that $X \cap M_{i} \neq \emptyset$.
+    If $X$ is a module of $G'$, then, since modules are either completely
+    adjacent or completely non adjacent, we deduce that $\left\{M_1, M_2, \ldots, M_{p}\right\}
+    \setminus \left\{M'\right\}$
+    forms a module of $Q$. Since such module is non-trivial ($M$ is
+    not in the module)
+    and $Q$ is prime, we get a contradiction.
+    Therefore $X$ is not a module of $G'$ and $M'$ is strong in $G'$.
+
+    Let $N \in V\left(Q\right) \setminus \left\{M\right\}$.
+    Using the strength of $M'$ in $G'$ and that of $N$ in $G$, 
+    we deduce that $N$ is strong in $G'$.
+    
+    Now we prove maximality. Suppose that for some $N \in \left(V\left(Q\right)
+        \setminus \left\{M\right\} \right) \cup \left\{M'\right\}$
+    such module is not maximal in $G'$. By the strength of the modules
+    in $V\left(Q\right)$, we deduce that there exists
+    $\Gamma' \subsetneq \left(V\left(Q\right) \setminus \left\{M\right\}\right) 
+    \cup \left\{M'\right\}$ such that $N \in \Gamma'$ and
+    $\bigcup_{L \in \Gamma'} L \subsetneq V\left(G'\right)$ is a module of $G'$.
+    Let $\Gamma = \left(\Gamma' \setminus \left\{M'\right\}\right) \cup \left\{M\right\}$ 
+    if $M' \in \Gamma'$ or $\Gamma = \Gamma'$ otherwise.
+    The above observation imply that $\Gamma$ is a non-trivial module of $Q$, which is a contradiction.
+    Therefore all the modules in $\left(V\left(Q\right) \setminus \left\{M\right\}\right)
+    \cup \left\{M'\right\}$ are strong and maximal
+    in $G'$ and cover $V\left(G'\right)$.
+    
+    It's clear by construction that $Q'$ 
+    is isomorphic to $Q$.
+    \end{proof}
+    
+    This property is useful because
+    it allows to consider maximal
+    strong modules as
+    ``black boxes''
+    which can contain any subgraph. 
+    
+    We are now ready to prove an
+    important result.
+    
+    \begin{thm} (\cite{main}) \label{replacing thm}
+        Let $G$ be a graph of which
+        every $4$-hole is contained
+        is some maximal strong module,
+        and let $G\left[U\right]$ be a
+        maximum induced interval
+        subgraph of $G$.
+        For any maximal strong module
+        $M$ of $G$ intersecting $U$,
+        the set $M \cap U$ is a module
+        of $G\left[U\right]$, 
+        and replacing $G\left[M \cap U \right]$ 
+        by any maximum induced 
+        interval subgraph of $G\left[M\right]$ 
+        in $G\left[U\right]$ 
+        gives a maximum induced interval
+        subgraph of $G$.
+    \end{thm}
+    \begin{proof}
+        The first assertion is proved
+        by Lemma \ref{for thm}.
+        We focus on the second one.
+
+        Let $U'$  be the set of 
+        vertices that induces the new graph.
+        Since $G\left[M \cap U\right]$ is
+        interval, by the maximality of
+        $M \cap U'$, we deuce that
+        $\left|U'\right| \geq \left|U\right|$.
+
+        We are left to prove that
+        $G\left[U'\right]$ is interval.
+        By way of contradiction,
+        suppose that $G\left[U'\right]$ 
+        is not interval.
+        Thus, there exists a
+        subgraph $X \in \mathcal{F}_{I}$
+        in $G\left[U'\right]$.
+        Since $G$ is $4$-hole free, 
+        by Proposition \ref{main prop},
+        at least one of $M \cap U'$ 
+        and $N\left(M\right) \cap U'$ 
+        induces a clique in $G$.
+        Since $G$ is $4$-hole free,
+        $X$ must be prime and,
+        by Lemma \ref{prime lemma},
+        $X$ contains exactly
+        one vertex of $M$.
+        Call such vertex $x$.
+        By assumption, 
+        there exists $x' \in M \cap U$.
+        Let $X' \defeq X \setminus \left\{x\right\} \cup \left\{x'\right\}$.
+        We thus have $X' \subseteq U$,
+        but $G\left[X'\right]$ is 
+        isomorphic to $G\left[X\right]$.
+        Thus contradicting the fact
+        that $G\left[U\right]$ is an
+        interval graph.
+    \end{proof}
+
+    This discussions
+    suggests to strip $G$ of
+    its universal vertices and
+    compute $Q\left(G\right)$.
+    If $Q\left(G\right)$ is
+    edgeless, then we
+    solve
+    each module individually.
+    Or, if $Q\left(G\right)$ is 
+    a clique, we have two cases. 
+    Either
+    find two
+    non-clique modules of $Q\left(G\right)$,
+    and thus we can easily find
+    a $4$-hole in $G$ (just like
+    in the proof
+    of Proposition \ref{main prop})
+    and branch on
+    deleting one vertex of it.
+    We can also find only one
+    non-clique module,
+    in which case we solve
+    it individually.
+    We cannot have only clique
+    modules in this case, 
+    otherwise we would have
+    a universal vertex.
+    Finally, if $Q\left(G\right)$
+    is prime,
+    Theorem \ref{replacing thm} 
+    and \ref{main prop}
+    tell us that if we
+    transform $Q\left(G\right)$ into
+    an interval graph (in particular,
+    a $4$-hole free graph)
+    a solution is given by
+    solving individually
+    the simplicial modules
+    in $Q\left(G\right)$. 
+    
+    Therefore, from
+    now on, we will be looking
+    only at the quotient graph $Q\left(G\right)$,
+    which we will denote by $Q$ 
+    for the sake of brevity.
+    Moreover, we will be referring
+    to the vertices of $Q$ as the
+    \emph{modules} of $Q$,
+    not to be confused with the 
+    \emph{vertices} of the
+    original graph $G$.
+    We will also keep
+    looking for
+    minimal modifications
+    turning $Q$ in an
+    interval graph (if it is not
+    one already). Only,
+    in this case, 
+    the minimality
+    of modifications will
+    not consist in deleting
+    the minimal number of modules
+    of $Q$ but in deleting
+    the modules of $Q$ so
+    to minimize the total
+    number of vertices
+    contained in such
+    modules.
+    For any set $S$ of modules of $Q$ 
+    we denote by $\#S$ the cardinality
+    of their union (which is the
+    sum of their cardinality,
+    since they are disjoint).
+
+    \section{Clique decompositions}
+
+    We now introduce the notion of
+    a clique decomposition of a graph $Q$.
+
+    \begin{defn}
+        Given a graph $Q$, we call
+        a clique decomposition of $Q$ a 
+        connected graph $\mathcal{K}$ whose vertex set
+        is the set of (inclusion-wise)
+        maximal cliques of $Q$ (called bags) and
+        edge set such that for all
+        $v \in Q$, the subgraph
+        induced by the set of bags containing
+        $v$ is connected.
+    \end{defn}
+
+    It turns out that interval
+    graphs are characterized by
+    their clique decomposition.
+    
+    \begin{prop} \label{clique-path}
+        A graph $Q$ is an 
+        interval graph if and only if
+        it has a clique-path decompostion.
+    \end{prop}
+    \begin{proof}
+        Suppose that a graph $Q$ 
+        is interval.
+        Let $\mathcal{I} = \left(I_{v}\right)_{v \in V\left(Q\right)}$ 
+        be an interval model of it.
+        We assume without loss
+        of generality that
+        all $I_{v}$ are closed
+        intervals, all intersections
+        $I_{v} \cap I_{v'}$ are
+        not singletons and that
+        such interval model is
+        normalized, that is,
+        $\inf \left\{a \mid \left[a, b\right] \in \mathcal{I} \right\} = 0$
+        and $\sup \left\{b \mid \left[a, b\right] \in \mathcal{I}\right\} = 1$.
+
+        For any $a \in \left[0, 1\right]$, 
+        we define $V\left(a\right) = \left\{v \mid a \in I_{v}\right\}$.
+        Now, we define inductively the
+        family $\left(a_0, \ldots, a_{l}\right)$ 
+        such that $a_i \in \left[0, 1\right]$ 
+        for all $0 \leq i \leq l$.
+
+        We define $a_0 \defeq 0$ and
+        $a_{i+1} \defeq \sup \left\{a \in \left[a_{i}, 1\right] \mid 
+        V\left(a_{i}\right) \subseteq V\left(a\right)\right\}$.
+        
+        Let $\left(a_0, a_1, \ldots, a_{l}\right)$ 
+        be the family obtained at 
+        the end of this construction.
+        It is clear that $V\left(a_1\right), \ldots, V\left(a_{l}\right)$ 
+        are the maximal cliques of $G$.
+        Moreover, if $v \in V\left(a_{i}\right) \cap V\left(a_{k}\right)$,
+        then $v \in V\left(a_{j}\right)$
+        for all $i < j < k$.
+        Thus yielding a clique-path 
+        decomposition of $Q$.
+
+        Conversely, let $M_0, \ldots, M_{l-1}$ 
+        be a clique-path decompostion
+        of a graph $Q$. 
+        Let $M \defeq \bigcup_{i=0}^{l-1} M_{i}$.
+        For all $v \in M$,
+        let $\texttt{left}\left(v\right)$
+        (resp. $\texttt{right}\left(v\right)$)
+        be the smallest
+        (resp. largest) index $i$ 
+        such that $v \in M_{i}$.
+        For $v \in V\left(Q\right)$,
+        let $I_{v} \defeq \left[\texttt{left}\left(v\right) - \frac{1}{3}, 
+        \texttt{right}\left(v\right) + \frac{1}{3}\right]$.
+        The interval model $\mathcal{I} = \left(I_{v}\right)_{v \in V\left(Q\right)}$
+        represents a graph with the
+        given clique-path decomposition.
+    \end{proof}
+
+    Given Proposition \ref{clique-path},
+    in order to transform
+    a graph $Q$ into an
+    interval graph, it suffices
+    to to modify
+    (always with the minimal
+    number of vertex deletions)
+    a clique decomposition of
+    $Q$ into a clique-path decomposition.
+    
+    Moreover, as proved in \cite{inter-path},
+    one can check in linear time whether
+    a graph is interval and, in case of 
+    a prositive answer, output
+    a clique-path decomposition of it.
+    We will denote such function by
+    $\texttt{compute\_clique\_path}\left(\cdot\right)$.
+
+    \section{Olive-ring decomposition}
+
+    In this section we will give
+    an outline of the results 
+    and the ideas behind the 
+    notion of the olive-ring
+    decomposition used in the
+    vertex deletion algorithm
+    in \cite{main}.
+
+    An olive-ring is a
+    graph made of a main cycle
+    with all other vertices
+    attached to it having 
+    degree one.
+
+    At this point of 
+    the algorithm,
+    the author of \cite{main} focuses
+    on finding an olive-ring
+    decomposition of $Q$
+    by first computing
+    a hole
+    decomposition of $Q - S\left(Q\right)$.
+    The result is very technical
+    but we would still like
+    to give a glimpse into
+    the technique used.
+    The proofs of the
+    statements in this
+    section require
+    some pretty
+    involved constructions
+    but they are not
+    very hard to check
+    by hand.
+    For the detailed
+    explanations we
+    refer the reader to
+    sections $4$ and $5$ 
+    of \cite{main}.
+    
+    We start by using the
+    algorithm $\texttt{find\_hole}\left(Q\right)$
+    to find a hole in $Q$ if
+    there is one.
+    If none is found, then we
+    can apply the following lemma.
+
+    \begin{lemma} (\cite{main}) \label{large caw lemma}
+        Let $W$ be a large caw
+        of a prime graph $Q$, 
+        then we can in find
+        a subgraph of $Q$ 
+        in $\mathcal{F}_{LI}$ 
+        if the shallow terminal of $W$
+        is non-simplicial in $Q$.
+    \end{lemma}
+
+    This lemma tells us 
+    that, if the graph $Q$
+    is chordal, then
+    the graph $Q - S\left(Q\right)$ 
+    is either interval,
+    or we can return a
+    subgraph of $Q$ in $\mathcal{F}_{LI}$.
+    We can subsequently
+    compute a clique-path 
+    decomposition of $Q - S\left(Q\right)$ 
+    with the linear-time
+    subroutine $\texttt{compute\_clique\_path}\left(Q - S\left(Q\right)\right)$.
+    and then join the two ends
+    of the path without
+    breaking any of the 
+    conditions of
+    the definition
+    of a clique decomposition,
+    thus getting a
+    clique hole decomposition
+    of $Q - S\left(Q\right)$.
+   
+    On the other end,
+    if $Q$ is not
+    chordal, we must use a
+    more sophisticated tool.
+    We first suppose that 
+    the hole returned by
+    the function $\texttt{find\_hole}\left(Q\right)$ 
+    is long, otherwise,
+    we just return the
+    short hole.
+    We have the following
+    technical lemma which 
+    allows us to give 
+    a more precise description 
+    of the structure
+    of the graphs we will
+    be considering from now on.
+    
+    \begin{lemma} (\cite{main}) \label{fund lemma}
+        Let $H$ be a hole
+        of a prime graph $Q$.
+        We can, in linear time,
+        find a subgraph of $Q$
+        in $\mathcal{F}_{LI}$
+        if there exists a vertex $v$ 
+        satisfying one of the
+        following three
+        conditions:
+        \begin{enumerate}
+            \item the neighbours
+                of $v$ in $H$ 
+                are not consectuive;
+            \item $v$ is adjacent
+                to $\left|H\right| - 2$ 
+                or more vertices in $H$;
+            \item $v$ is non-simplicial and nonadjacent
+               to $H$. \label{cond 3}
+        \end{enumerate}
+        Moreover, if there exists
+        a subset $U \subseteq Q$, 
+        such that $Q\left[U\right]$ 
+        is connected and the
+        neighbors of $U$ in
+        $H$ do not induce
+        a subpath, we can 
+        return in linear
+        time a subgraph of $Q$ 
+        in $\mathcal{F}_{LI}$.
+    \end{lemma}
+    
+    Therefore, if $Q$ is a
+    locally interval graph,
+    for any vertex $h$ of $H$, 
+    the subgraph $Q - N\left[h\right]$ 
+    must be chordal, otherwise
+    $h$ and any hole of $Q - N\left[h\right]$
+    will satisfy condition \ref{cond 3}
+    of Lemma \ref{fund lemma}.
+    Moreover, combining lemmas
+    \ref{large caw lemma} 
+    and \ref{fund lemma},
+    we deduce that $Q - N\left[h\right] - S\left(Q\right)$ 
+    is an interval graph.
+    In order to exploit
+    this observation,
+    we require the more 
+    sophisticated notion
+    of an auxiliary graph.
+
+    From now on, when we
+    consider a hole $H$, 
+    we will label its consecutive
+    vertices as $h_{0}, h_{1}, \ldots, h_{\left|H\right|-1}$,
+    where indices are understood modulo
+    $\left|H\right|$. Note that to univocally 
+    assign these labels, it suffices to
+    specify two consecutive 
+    vertices $h_0$ and $h_1$
+    of $H$.
+    
+    By lemma \ref{fund lemma},
+    we can assume that
+    the vertices in $N\left[v\right] \cap H$
+    induce a subpath for any vertex
+    $v$ and any fixed hole $H$.
+    Thus, once we are given
+    a hole $H$, we can
+    define for all vertices
+    $v$ adjacent to it,
+    the indices $\texttt{first}\left(v\right)$
+    and $\texttt{last}\left(v\right)$
+    such that 
+    \begin{itemize}
+        \item $-\left|H\right| < \texttt{first}\left(v\right)
+            \leq 0 \leq \texttt{last}\left(v\right) < \left|H\right|
+            \text{, if } v \sim h_{0}\text{; or}$ 
+        \item $0 < \texttt{first}\left(v\right) 
+            \leq \texttt{last}\left(v\right) < \left|H\right|
+            \text{, otherwise.}$
+    \end{itemize}
+    
+    Now, starting from 
+    the hole returned
+    by $\texttt{find\_hole}\left(Q\right)$, we
+    want to find a potentially new hole
+    on which we
+    enforce some local
+    properties on one of its 
+    vertices (in fact, on $h_0$).
+    We have the following.
+
+    \begin{lemma} (\cite{main}) \label{hole lemma}
+        We can, in linear time,
+        find either a subgraph
+        of $Q$ in $\mathcal{F}_{LI}$, 
+        or a hole $H$ with
+        a vertex $h_0$ such that
+        for every vertex $v \in N\left(h_{-1}\right) \cap  N\left(h_{1}\right)$
+        we have
+        $N\left[v\right] \subseteq N\left[h_0\right]$.
+    \end{lemma}
+    
+    From now on, 
+    we assume that the hole $H$
+    we are working with
+    has the properties
+    stated in Lemma \ref{hole lemma}.
+    We observe that by
+    Lemma \ref{fund lemma},
+    we can assume that for
+    all vertices 
+    $v$ adjacent to $H$, 
+    $N\left[v\right] \cap V\left(H\right)$
+    induces a subpath.
+    Also, by Lemma \ref{hole lemma},
+    we can assume that 
+    every common neighbor $v$ 
+    of $h_1$ and $h_{-1}$ 
+    is adjacent to $h_0$.
+    Lemma \ref{hole lemma}
+    also tells us
+    that for any $v$ adjacent
+    to $h_0$, $v \not\sim h_2$ 
+    and $v \not\sim h_{-2}$,
+    since $N\left[v\right] \subseteq N\left[h_0\right]$.
+    We can also assume
+    that such $v$ is adjacent to at
+    least one of $h_1$ or $h_{-1}$.
+    Otherwise, since $v \sim h_0$,
+    $v \not\sim h_2$ and $v \not \sim h_{-2}$,
+    if $u$ is adjacent to $H$,
+    we call the second part of 
+    Lemma \ref{fund lemma}
+    with $U = \left\{v, u\right\}$;
+    otherwise, we just
+    return \emph{long claw}
+    $\left\{u, v, h_0, h_1, h_{2}, h_{-2}\right\}$.
+    Finally, for any $v \sim h_0$,
+    such that $v \sim u$ with
+    $u \not\sim h_0$,
+    we can assume that
+    $v$ is not 
+    adjacent to all
+    of $h_0$, $h_1$ and $h_{-1}$. 
+    Otherwise, we
+    would have $N\left[v\right] \subseteq N\left[h_0\right]$ 
+    and thus $u \in N\left[h_0\right]$,
+    which is a contradiction.
+    All in all, we have
+    that for all $v \sim h_0$,
+    such that $v \sim u$,
+    with $u \not\sim h_0$,
+    we can assume that
+    $v$ is adjacent to
+    exactly one of $h_1$
+    and $h_{-1}$ and so,
+    that either $\texttt{first}\left(v\right)
+    < \texttt{last}\left(v\right) = 0$,
+    or $0 = \texttt{first}\left(v\right) < \texttt{last}\left(v\right)$.
+    We are now ready to 
+    give the definition of 
+    the auxiliary graph $\mho\left(Q\right)$.
+
+    \begin{defn} \label{aux graph}
+        Given a graph $Q$, 
+        and a hole $H$ of $Q$ 
+        with the properties
+        required by Lemma \ref{hole lemma}. Let
+        $T \defeq N\left[h_0\right]$,
+        let $L$ and $R$ be two distinct
+        copies of $T$ and
+        let $\overline{T} \defeq V\left(Q\right) \setminus T$.
+        In order to distinguish
+        two copies of the same
+        vertex $v \in T$,
+        we denote by $v^{l}$ 
+        its copy in $L$ 
+        and by $v^{r}$ its 
+        copy in $R$.
+        The vertex set $\mho\left(Q\right)$
+        is the union $\overline{T} \cup L \cup R \cup \left\{w\right\}$,
+        where $w$ is an additional fresh vertex.
+        For every edge $uv \in E\left(Q\right)$,
+        we add to the edge set
+        of $\mho\left(Q\right)$
+        \begin{itemize}
+            \item an edge $uv$ if neither $u$ not $v$ is in $T$;
+            \item two edges $u^{l}v^{l}$ and $u^{r}v^{r}$ 
+                if both $u$ and $v$ are in $T$ ;
+            \item an edge $uv^{l}$ if $u \in \overline{T}$,
+                $v \in T$ and $0 = \texttt{first}\left(v\right)
+                < \texttt{last}\left(v\right)$.
+            \item an edge $uv^{r}$ and
+                an edge $wv^{l}$ 
+                if $u \in \overline{T}$,
+            $v \in T$ and $\texttt{first}\left(v\right)
+            < \texttt{last}\left(v\right) = 0$.
+        \end{itemize}
+    \end{defn}
+    
+    Notice that, by this definition, 
+    we have $h_1^{l} \sim h_{2}$ and
+    $h_{-2} \sim h_{-1}^{r}$.
+    Also, the addition
+    of the vertex $w$ is done so that 
+    we can ``remember'' 
+    which vertices in $R$ are
+    connected to $\overline{T}$ 
+    by looking at vertices in $L$.
+    We add that the auxiliary graph of $Q$ is also
+    cheap to build. 
+
+    \begin{prop} (\cite{main})
+        The number of vertices (resp. edges) of the graph
+        $\mho\left(Q\right)$ are upper bounded 
+        by $2 \left|G\right|$ (resp. $2 \|G\|$).
+        Moreover, an adjacency matrix of $\mho\left(Q\right)$
+        and $\mho\left(Q - S\left(Q\right)\right)$,
+        can be built in linear time.
+    \end{prop}
+
+    The idea behind Definition \ref{aux graph}
+    is that the auxilary graph either
+    ``opens up'' all holes of $Q$,
+    or we can find subgraphs of $Q$ in
+    $\mathcal{F}_{LI}$ in linear time. 
+    To make this more precise, we 
+    give the following lemma.
+
+    \begin{lemma} (\cite{main}) 
+        If $\mho\left(Q\right)$ is not chordal,
+        then we can find a subgraph of
+        $Q$ in $\mathcal{F}_{LI}$.
+    \end{lemma}
+   
+    We also have a version of
+    Lemma \ref{large caw lemma}
+    for $\mho\left(Q\right)$.
+
+    \begin{lemma}
+        If $\mho\left(Q - S\left(Q\right)\right)$
+        is not an interval graph,
+        then we can
+        find a subgraph of 
+        $Q$ in $\mathcal{F}_{LI}$.
+    \end{lemma}
+
+    Thus, we can assume
+    that $\mho\left(Q - S\left(Q\right)\right)$
+    is an interval graph
+    which we can use to
+    construct a hole
+    decomposition of $Q - S\left(Q\right)$.
+    Notice that, given
+    a vertex $v$ and
+    a set of vertices
+    $S$, one
+    can check in
+    $\mathcal{O}\left(d\left(v\right)\right)$
+    time whether $v$ 
+    is adjacent to $S$ 
+    or not. Thus, we can
+    check in linear time
+    whether any of 
+    the modules of $Q - S\left(Q\right)$ 
+    is adjacent to the set
+    $L \cup R \cup \left(\overline{T} \cap V\left(H\right)\right)$.
+    If any such module is found,
+    then, it is surely not
+    simplicial in $Q$,
+    we can thus call
+    Lemma \ref{fund lemma}
+    on $H$ and $v$ as input
+    and return a subgraph
+    of $Q$ in $\mathcal{F}_{LI}$.
+    We can thus assume 
+    that all vertices of
+    $Q - S\left(Q\right)$ 
+    are adjacent to $H$ 
+    and so, all modules
+    in $\overline{T}$
+    are adjacent to
+    one among $h_1^{l}, h_2, \ldots h_{-1}^{r}$.
+    Let $\mathcal{C}$ be the
+    clique-path decomposition
+    of $\mho\left(Q - S\left(Q\right)\right)$
+    with consecutive bags
+    numbered $K_0, K_1, \ldots, K_{\left|\mathcal{C}\right| - 1}$.
+    By the definition of
+    the auxiliary graph, 
+    one can
+    show that either the vertex $w$ 
+    is simplicial in $\mho\left(Q - S\left(Q\right)\right)$ or
+    we can return a
+    subgraph of $Q$ in
+    $\mathcal{F}_{LI}$
+    in linear time \cite{main}.
+    So, we can assume
+    that $w$ is simplicial
+    in $\mho\left(Q - S\left(Q\right)\right)$
+    and thus
+    its closed neighborhood
+    $N\left[w\right]$, is
+    a maximal clique of
+    $\mho\left(Q - S\left(Q\right)\right)$.
+    In this case we have
+    that $N\left[w\right]$ 
+    is an end bag of
+    $\mathcal{C}$.
+    We can argue this
+    by showing that
+    every neighbor 
+    of $N\left[w\right]$ 
+    is connected to $h_0^{l}$ 
+    in $\mho\left(Q - S\left(Q\right)\right) - N\left[w\right]$.
+    In fact, we have that
+    every vertex in
+    $L \setminus N\left[w\right]$,
+    is adjacent to $h_0^{l}$,
+    by definition.
+    Also, every vertex of 
+    $\overline{T}$ is conected
+    to one of $h_1^{l}, h_2, \ldots, h_{-1}^{r}$.
+    Since neither $h_0^{l}$ nor $h_0^{r}$ 
+    are simplicial in $\mho\left(Q\right)$,
+    we get that $h_0^{l}, h_1^{l}, h_2, \ldots,
+    h_{-1}^{r}, h_0^{r}$ remains a path
+    in $\mho\left(Q - S\left(Q\right)\right) - N\left[w\right]$.
+    Thus $\mho\left(Q - S\left(Q\right)\right) - N\left[w\right]$
+    is connected and $N\left[w\right]$
+    is an end bag of $\mathcal{C}$.
+    Without loss of generality,
+    assume that $N\left[w\right] = K_0$.
+    Notice that since $w$ is
+    simplicial, the set
+    $S = \left\{v^{r} \mid \text{ there exists
+    $u$ with } v^{r} \sim u\right\}$ 
+    is a clique. Moreover, 
+    it is the minimal 
+    clique separator of
+    $\left\{w\right\} \cup L \cup \overline{T}$
+    and $R \setminus S$.
+    Therefore $h_0^{r}$ 
+    only appears in bags
+    whose index is larger
+    than the largest index in
+    of the bag containing $S$.
+    Let $l$ be the largest
+    index such that $h_0^{r} \not\in K_{l}$,
+    One can show that the graph $\mathcal{K}$
+    constructed by taking
+    the subpath $K_1, \ldots, K_{l}$ 
+    and joining its ends is
+    a clique hole decomposition
+    of $Q - S\left(Q\right)$.
+    
+    All in all, we have the following 
+    theorem.
+
+    \begin{thm} (\cite{main})
+        Given a graph $G$, we
+        can in linear time, either
+        build its quotient graph
+        $Q$ and a hole decomposition
+        of $Q - S\left(Q\right)$,
+        or output a subgraph
+        in $\mathcal{F}_{LI}$.
+        
+        Moreover, if such hole
+        decomposition is found,
+        one can retrieve in linear
+        time a normal Helly
+        circular-arc
+        interval model of $Q - S\left(Q\right)$
+        as well as the shortest hole 
+        of $Q$ (if there is one).
+    
+        Finally, if such a hole 
+        decomposition is found,
+        its consecutive bags are
+        labeled as $K_0, K_1, \ldots, K_{\left|\mathcal{K}\right|-1}$,
+        with $\left|\mathcal{K}\right| \leq \left|Q\right|$.
+        \label{olive-ring}
+    \end{thm}
+
+    We remark right away
+    that, when we compute
+    the shortest hole of $Q$,
+    if such hole is short,
+    that is, it is either 
+    a $4$ or a $5$-hole, 
+    we branch on deleting one vertex of it.
+    We can thus assume
+    that the shortest
+    hole of $Q$ has
+    six or more vertices.
+        
+    The advantage of having a hole
+    decomposition $\mathcal{K}$ of $Q$ is 
+    that every hole of $Q$
+    spans all the bags of $\mathcal{K}$.
+
+    \begin{prop} \label{hole prop}
+        Given a hole decomposition $\mathcal{K}$ of
+        a graph $Q$,
+        for all bags $K$ of $\mathcal{K}$,
+        and every hole $H$ of $Q$,
+        there exists a vertex $v$ 
+        of $H$ contained in $K$.
+    \end{prop}
+    \begin{proof}
+        By way of contradiction,
+        suppose that there exists a 
+        bag $K$ which does not 
+        contain any vertex of a hole $H$.
+        
+        For all vertces $v$ of $H$, 
+        let $K_{v}$ denote the
+        set of bags containing $v$. 
+        Let $K'$ be the closest bag
+        to $K$ (say counterclockwise in $\mathcal{K}$)
+        containing a vertex $v$ of $H$.
+        Let $u, w$ be the two neighbors
+        of $v$ in $H$.
+        Since $u \not\sim w$, we have
+        $K_{u} \cap K_{w} = \emptyset$.
+        Thus, at least one of $K_{u}$ 
+        and $K_{w}$ is contained
+        in $K_{v}$. Suppose
+        without loss of generality
+        that $K_{u} \subseteq K_{v}$.
+        Let $u' \neq v$ be the other
+        neighbor of $u$
+        (so $u' \neq w$ since $H$ has at 
+        least four vertices). Since
+        $K_{u} \cap K_{u'} \neq \emptyset$
+        and $K_{u} \subseteq K_{v}$,
+        we have $K_{u'} \cap K_{v} \neq \emptyset$
+        and so $v \sim u'$, which
+        gives us a contradiction.
+    \end{proof}
+
+    \begin{rmk} \label{hole rmk}
+        Thus, it suffices to make the hole
+        decomposition
+        into a path to break all the holes
+        in the original graph.
+        However, in our case, we want
+        to achieve the 
+        minimal number of 
+        deletions needed 
+        to break such holes.      
+    \end{rmk}
+
+    We now introduce some notation.
+    For any vertex $v$, let 
+    $\texttt{left}\left(v\right)$
+    and $\texttt{right}\left(v\right)$ 
+    be defined as the indices such that
+    $v \not \in K _{\texttt{left}\left(v\right)-1}$,
+    $v \not \in K_{\texttt{right}\left(v\right)+1}$ 
+    and $v \in K_{i}$ for all 
+    $i \in \left[\texttt{left}\left(v\right), \texttt{right}\left(v\right)\right]$,
+    where indices here are understood
+    modulo $\left|\mathcal{K}\right|$.
+    The existence of the
+    above indices is
+    assured by the fact that 
+    the bags containing
+    any vertex $v$ induce a proper subpath
+    in $\mathcal{K}$.
+
+    With this notation, we are
+    ready to present another
+    important result.
+
+    \begin{lemma} (\cite{main}) \label{or_2}
+        Given a hole decomposition
+        of $Q - S\left(Q\right)$,
+        we can, in linear time,
+        construct a clique decomposition
+        of $Q$ which is an olive-ring.
+        Moreover, a module of $Q$ 
+        does not appear in any
+        bag of the main cycle
+        if and only if it is
+        a terminal of a caw
+        of which all other modules are in
+        the main cycle.
+    \end{lemma}
+    \begin{proof}
+        Before presenting the proof, 
+        we remark that for any $s \in S\left(Q\right)$ 
+        the set $N\left[s\right]$ 
+        is an inclusion-wise maximal
+        clique. It is thus a bag
+        of any clique decomposition of $Q$.
+
+        Let $\mathcal{K}$ be the
+        hole decomposition of $Q - S\left(Q\right)$.
+        Traversing all bags in $\mathcal{K}$,
+        we record $\texttt{left}\left(v\right)$ 
+        and $\texttt{right}\left(v\right)$ 
+        for all $v$ modules of $Q$.
+        We also record $\left|K_{i} \cap K_{i+1}\right|$
+        for all $i = 0, \ldots, \left|\mathcal{K}\right|-1$.
+        We finally store, for every 
+        module $s \in S\left(Q\right)$,
+        the values $p \defeq \max_{v \in N\left(s\right)} \texttt{left}\left(v\right)$ 
+        and $q \defeq \min_{v \in N\left(s\right)} \texttt{right}\left(v\right)$,
+        so that $N\left(s\right) \subseteq K_{l} \cap K_{l+1}$ 
+        for all $l \in \left[p, q-1\right]$.
+
+        We do the following.
+        \begin{itemize}
+            \item If $p = q$ and $K_{p} = N\left(s\right)$,
+                then we add $s$ to $K_{p}$;
+            \item if there exists $l$ 
+                such that $l \in \left[p, q-1\right]$ 
+                and $\left|K_{l} \cap K_{l+1}\right| = \left|N\left(s\right)\right|$,
+                then we insert $N\left[s\right]$
+                as a new bag between $K_{l}$ 
+                and $K_{l+1}$;
+            \item otherwise, add $N\left[s\right]$ 
+                as a pendant bag to $K_{p}$.
+        \end{itemize}
+
+        It is easy to check that this
+        pocedure yileds an olive-ring
+        decomposition of $Q$. 
+        Now, let $P\left(Q\right)$ 
+        be the set of modules that
+        appear only in pendant bags
+        (so, clearly, $P\left(Q\right) \subseteq S\left(Q\right))$.
+        We notice
+        in passing, that the addition of
+        the simplicial modules in the main
+        cycle keeps true the property
+        of the existence of a normal
+        Helly circular-arc model
+        of subgraph induced
+        by the modules appearing 
+        in the main cycle 
+        of the decomposition,
+        which in this case
+        is $Q - P\left(Q\right)$.
+        
+        We now take care of the 
+        second assertion of the lemma.
+        Suppose that a module of $Q$
+        is a terminal of a caw of which
+        all other modules are in the
+        main cycle. If such module
+        appeared itself of the main
+        cycle then, since no
+        caw has a hole, 
+        the fact of having a normal Helly
+        circular-arc model of $Q - P\left(Q\right)$,
+        would imply the existence of 
+        an interval model of a caw, which
+        is impossible. 
+
+        On the other hand, let 
+        $v$ be a module in $P\left(Q\right)$.
+        So, there are vertices $x \in K_{p-1} \setminus K_{p}$ 
+        and $y \in K_{q+1} \setminus K_{q}$.
+        Since $\left(K_{l} \cap K_{l+1}\right) \setminus N\left(s\right)$
+        is non-empty, there exists an
+        $x-y$ path entirely contained
+        in the main cycle and avoiding
+        neighbors of $s$. We can also
+        find in linear time
+        an $s-x$ path with only one intermediate
+        vertex $x' \in N\left(s\right)$
+        such that $\texttt{right}\left(x'\right)=p$
+        and an $s-y$ path with only one intermediate
+        vertex $y' \in N\left(s\right)$ 
+        such that $\texttt{left}\left(y'\right)=q$.
+        Such path witness the at $\left\{s, x, y\right\}$.
+
+        The union of these paths contains a caw.
+        Since all other vertices are from the main 
+        cycle, this caw necessarily contains $s$ 
+        (since otherwise, as previously remarked,
+        we would get an interval model of a caw,
+        which is impossible).
+        Since $s$ is simplicial, 
+        it is a terminal of this caw.
+        Which is the desired result.
+    \end{proof}
+    
+    We will call the algorithm
+    that either returns an olive ring
+    decomposition or a subgraph in $\mathcal{F}_{I}$,
+    $\texttt{decompose}\left(\cdot\right)$.
+    
+    \begin{cor}
+        Since caws do not have circular-arc models,
+        the subgraph $Q - P\left(Q\right)$ is
+        a normal Helly circular-arc graph
+        which is also maximal in $Q$.
+    \end{cor}
+    
+    As a last remark,
+    it is easy to see that,
+    given a hole decomposition $\mathcal{K}$ 
+    for $Q - P\left(Q\right)$, a circular-arc model
+    with circle length $\left|\mathcal{K}\right|$ 
+    for $Q - P\left(Q\right)$ is given by
+    
+    \begin{gather*}
+    A_{v} =
+    \begin{cases}
+    \left[\texttt{left}\left(v\right) - \frac{1}{3}, 
+    \texttt{right}\left(v\right) + \frac{1}{3}\right], & \text{if } \texttt{left}\left(v\right) > 0, \\
+    \left[\left|\mathcal{K}\right| - \frac{1}{3}, 
+    \texttt{right}\left(v\right) + \frac{1}{3}\right], & \text{if } \texttt{left}\left(v\right) = 0.
+    \end{cases}
+    \end{gather*}
+    
+    Moreover, since holes (of $Q - P\left(Q\right)$) are of length
+    at least $4$, such circular arc model
+    is also normal and Helly.
+        
+    \section{From olive-ring to path decomposition}
+    Now that we have an olive-ring
+    decomposition of $Q$, we only need to
+    strip off its pendant bags and break
+    its main cycle in order to get an interval graph.
+    However, we need to do so using
+    the minimum possible number of vertex
+    deletions. 
+    
+    In order to strip off the pendant
+    bags, we need to introduce the notion
+    of a minimal frame of a caw.
+
+    \begin{defn}
+        Given a frame $F$ of a large caw, we
+        denote by $\left[F\right]$
+        the set of bags $\texttt{right}\left(l\right),
+        \ldots, \texttt{left}\left(r\right)$,
+        (the inclusion-wise minimal
+        set of consecutive bags whose union contains
+        all non-terminal modules of $F$ ).
+        We denote by $I\left(F\right) = \bigcup_{l \in \left[
+        \texttt{right}\left(l\right) + 1, \texttt{left}\left(r\right) - 1\right]} 
+        K_{l} \setminus N\left(Q\right)\left(s\right)$,
+        the set of internal modules of $F$.
+        $I\left(F\right)$ is the set of
+        modules that can be used to construct
+        the base of a caw with frame $F$.
+        
+        $F$ is said to be minimal
+        if there is no other frame $F'$ 
+        such that $\left[F'\right] \subseteq \left[F\right]$.
+    \end{defn}
+    
+    Now consider, if there is one,
+    a minimal frame $F$ in $Q$.
+    We have the following technical lemma
+    whose proof can be found in \cite{main}.
+
+    \begin{lemma} (\cite{main}) \label{frame lemma}
+        We can, in linear time,
+        check whether or not
+        $Q$ has a caw.
+        If it is large,
+        we can also return
+        a minimal frame $F$ of it
+        such that the following
+        holds.
+
+        Let $G\left[U^{*}\right]$ be
+        a maximum induced interval
+        subgraph of $G$
+        such that $U^{*}$ 
+        intersects every module
+        of $F$.
+        Let $S_{i} \defeq K_{i} \cap K_{i+1} \setminus N_{Q}\left(s\right)$ 
+        where $\texttt{right}\left(v\right) \leq i < \texttt{left}\left(v\right)$
+        and let $l$ be such
+        that $\#S_{l}$ is minimum.
+        Then, there exists a maximum
+        induced interval subgraph
+        $G\left[U\right]$ 
+        disjoint from all modules in $S_{l}$.
+        Moreover, $S_{l}$ can be
+        found in linear time.
+    \end{lemma}
+    
+    We will denote the
+    function of Lemma \ref{frame lemma}
+    returning a minimal frame
+    $F$ by $\texttt{find\_minimal\_frame}\left(\cdot\right)$.
+
+    With this lemma, we ensure that
+    there always exists a minimum
+    solution that deletes either 
+    one module from $F$ or all
+    the modules in $S_{l}$.
+    
+    Even though the proof
+    of Lemma \ref{frame lemma}
+    is very technical, the
+    idea behind it is simple.
+    When we want to dispose
+    of a caw, we can either
+    branch on deleting one 
+    vertex from its frame
+    or delete the smallest
+    $l-r$ clique separator
+    in the subgraph (of $Q$) induced by
+    $\left\{l, r\right\} \cup I\left(F\right)$.
+
+    Suppose that $S_{l}$ is
+    deleted.
+    Then, we
+    also dispose of all
+    the caws with frames $F'$ 
+    such that $\left[F\right] \subseteq \left[F'\right]$.
+    Moreover, let $S_{l}$ 
+    be defined as above. It
+    is easy to see that we can
+    insert the pendant bag $v$
+    belonging to $F$
+    in between $K_{l}$ and
+    $K_{l+1}$ without breaking
+    any condition of the definition 
+    of a clique decomposition.
+    This also preserves the fact
+    that the graph $Q - \left(P\left(Q\right) \setminus v\right)$
+    is a normal Helly circular-arc graph.
+    This procedure
+    allows us to strip
+    all the pendant bags
+    of the olive-ring
+    decomposition possibly 
+    reinserting some of 
+    them in the main cycle
+    obtaining a clique-hole decomposition.
+    For the sake of notation,
+    we renumber the
+    bags of the clique-hole decomposition
+    so that consecutive
+    bags have consecutive
+    indices.
+
+    The last thing to
+    understand is how to break
+    all holes of $Q - P\left(Q\right)$
+    (if any are left)
+    given a hole decomposition $\mathcal{K}$.
+    We introduce the notion of a
+    hole cover of a graph $G$. 
+
+    \begin{defn}
+        Given a graph $G$,
+        a \emph{hole cover} of
+        $G$ is a set of vertices $V_{-}$ 
+        such that $G - V_{-}$ is a
+        chordal graph.
+    \end{defn}
+
+    We have the following lemma.
+    
+    \begin{lemma}
+        Given any clique-hole decomposition
+        $\mathcal{K}$ of a normal Helly
+        circular-arc graph $Q$, the hole
+        covers of $Q$ are given by the
+        the sets that contain the intersection
+        of consecutive bags.
+    \end{lemma}
+    \begin{proof}
+        On the one hand, take $M \defeq K_{l} \cap K_{l+1}$ 
+        for $K_{l}$ and $K_{l+1}$ two consecutive
+        bags of $\mathcal{K}$. 
+        By the chordlessness property
+        of graphs, for any hole $H$ and
+        any vertex $v$ of $H$, we have
+        that 
+        $v$ is at the intersection of
+        two consecutive bags.
+        Since the the set of bags
+        containing $v$ induces a
+        connected path in $\mathcal{K}$,
+        so a subpath of $\mathcal{K}$,
+        $v$ is also at the
+        intersection of two bags.
+        Moreover,
+        by Proposition \ref{hole prop},
+        all intersections of consecutive
+        cliques contain at least one vertex
+        (actually, exactly two) of
+        any hole.
+        Thus $M$ is a hole cover of $Q$.
+
+        On the other hand, take a hole separator
+        $M$ of $Q$. Then it is a
+        clique and it must contain
+        the intersection of two consecutive bags.
+        If not, we can find the minimum non-trivial
+        cycle $C$ from any vertex in $K_0 \cap K_1$
+        to itself that avoids $M$. Such non-trivial
+        cycle exists because for any two consecutive
+        bags of $\mathcal{K}$ there is a vertex $v$ 
+        in their intersection which is not 
+        contained in $M$.
+
+        Since $Q$ is a normal Helly circular-arc
+        graph, $C$ must have four or more vertices.
+        Moreover, by the minimality of $C$, it must be chordless.
+        Thus, $C$ is a hole.
+        Which concludes the proof.
+    \end{proof}
+    
+    From this lemma the following proposition 
+    is deduced immediately.
+
+    \begin{prop} (\cite{main}) \label{cycle prop}
+        Let $\mathcal{K}$ be the hole decomposition of
+        $Q$. For any
+        inclusion-wise 
+        minimal hole cover $V_{-}$ of $Q$
+        there exists an index $l$ 
+        such that $V_{-} = K_{l} \cap K_{l+1}$.
+    \end{prop}
+
+    It follows that,
+    the minimal modification
+    that breaks all holes of $Q$ 
+    is the deletion of the
+    vertices in $K_{l} \cap K_{l+1}$ 
+    so that $\# \left(K_{l} \cap K_{l+1}\right)$
+    is minimal.
+
+    \section{The algorithm}
+    
+    We are now ready to
+    present the pseudocode
+    of the discussed procedure in
+    Algorithm \ref{main algo}.
+    We recall that, whenever
+    we find a small caw in
+    any of our subroutines,
+    we implicitly branch
+    on deleting one vertex of it.
+
+    \begin{algorithm} \label{main algo}
+        \caption{Interval vertex deletion}
+
+        \SetKwFunction{IVD}{\texttt{interval\_vertex\_deletion}}
+        \SetKwProg{func}{}{}{}
+
+        \SetKw{strip}{strip}
+        \SetKw{branch}{branch}
+        \SetKw{return}{return}
+        \SetKw{find}{find}
+        \SetKw{delete}{delete}
+
+        \KwIn{A graph $G$ and an
+        integer $k$ representing
+        the maximum number deletions.}
+        \KwOut{A minimal set $V_{\min}$
+        of vertices of $G$ such
+        that $G - V_{\min}$ is interval,
+        ``No'' otherwise.}
+  
+        \vspace{5pt}
+
+        \func{\IVD{$G$, $k$}}{
+
+            $V_{\min} \gets \emptyset$\; $k_{\min} \gets k$\; 
+
+            \If{$k_{\min} < 0$}{
+                \return ``No''\;
+            }
+            \If{$\texttt{find\_forbidden}\left(G\right)$ = ``No''}{
+                \return $V_{\min}$ \;
+            }
+            
+            \strip $G$ of its universal vertices\;
+            
+            $Q \gets \texttt{compute\_quotient}\left(G\right)$\;
+            \If{$Q$ is edgeless}{
+                \For{each module $M$ of $Q$}{
+                $\tilde{V}_{\min} \gets \texttt{interval\_vertex\_deletion}\left(G\left[M\right], k\right)$\;
+                \If{$\tilde{V}_{\min} = \text{``No''}$}{
+                        \return ``No''\;
+                    }
+                    $V_{\min} \gets V_{\min} \cup \tilde{V}_{\min}$\; $k_{\min} \gets k_{\min} - \left|\tilde{V}_{\min}\right|$\;
+                }
+                \return $V_{\min}$ \;
+            }
+            \If{$Q$ is a complete graph}{
+                \While{there exist two non-clique modules of $Q$}{
+                    \find a $4$-hole and \branch on deleting one vertex form it\;
+                    $k_{\min} \gets k_{\min} - 1$\;
+                }
+                \find the only non-clique module of $Q$, call it $M$\;
+                \return $\texttt{interval\_vertex\_deletion}\left(G\left[M\right], k_{\min}\right)$\; 
+            }
+            $\mathcal{K} \gets \texttt{decompose}\left(Q\right)$\;
+            \If{a short hole or a small caw is found}{
+                \branch on deleting one vertex from it\;
+                $k_{\min} \gets k_{\min} - 1$\;
+            }
+            \While{$Q$ contains a non-simplicial module}{
+                \find a $4$-hole and branch on deleting one vertex from it\;
+                $k_{\min} \gets k_{\min} - 1$\;
+            }
+            \For{each simplicial module $M$ of $Q$}{
+                $\tilde{V}_{\min} \gets \texttt{interval\_vertex\_deletion}\left(G\left[M\right], k_{min}\right)$\; \label{replacing line}
+                \If{$\tilde{V}_{\min} = \text{``No''}$}{
+                    \return ``No''\;
+                }
+                $V_{\min} \gets V_{\min} \cup \tilde{V}_{\min}$\;
+                $k_{\min} \gets k_{\min} - \left|\tilde{V}_{\min}\right|$\;
+            }
+            \While{$\mathcal{K}$ is not a hole}{
+                $F \gets \texttt{find\_minimal\_frame}\left(Q, \mathcal{K}\right)$ \;
+                \If{a small caw or a short hole is found}{
+                    \branch on deleting one vertex from it\;
+                    $k_{\min} \gets k_{\min} - 1$ \;
+                }
+                \branch on deleting either a module from $F$ or $S_{l}$ (as defined in Lemma \ref{frame lemma}) \label{most branch} 
+            }
+            \find the index $l$ such that $\#\left(K_{l} \cap K_{l+1}\right)$ is minimal (as defined in Proposition \ref{cycle prop})\;
+            \delete all vertices in $K_{l} \cap K_{l+1}$ \;
+            \return $V_{\min}$.
+        } 
+        
+    \end{algorithm}
+    
+    We note in passing that the vailidity of
+    line \ref{replacing line} in
+    Algorithm \ref{main algo}
+    is given by Theorem \ref{replacing thm}.
+    
+    The correctness of Algorithm \ref{main algo}
+    was shown throughout this text.
+    As for its complexity, each
+    branching step has at most
+    $8$ sub-instances (this
+    maximum is attained only
+    at line \ref{most branch}) each
+    of which can be computed
+    in linear time. Therefore,
+    there are at most $8^{k}$ 
+    total sub-instances and 
+    the total complexity of the agorithm
+    is $\mathcal{O} \left(8^{k} \cdot \left(\left|G\right| + \|G\|\right)\right)$.
+    In the case in which $G$ is 
+    a connected graph, this reduces to
+    $\mathcal{O} \left(8^{k} \cdot \|G\|\right)$.
+
+    We also can turn this
+    algorithm into an approximation
+    scheme in the following way. 
+    Whenever we return a small caw
+    or a short hole, we delete the whole
+    subgraph. When we branch on deleting
+    some entire modules at line \ref{most branch}
+    of Algorithm \ref{main algo},
+    we only delete exactly one
+    vertex from each module of
+    the frame $F$ and exactly
+    one vertex from the
+    union of the modules in $S_{l}$.
+    At least one of these
+    deletions is in some
+    minimum modification and
+    so the number of minimum
+    modifications of the
+    remaining graph decreases
+    by at least one.
+    Since we also have
+    that small caws and short
+    holes have at most $6$ ($ \leq 8$)
+    vertices, we have
+    a performance ratio of $8$.
+    Moreover, the algorithm clearly stops
+    after at most $\mathcal{O} \left(\left|G\right|\right)$ 
+    deletions and thus
+    such algorithm can beg
+    implemented in $\mathcal{O} \left(\left|G\right| \cdot \left(\left|G\right| + \|G\|\right)\right)$
+    time.
+
+    We have the following theorem
+
+    \begin{thm}
+        Algorithm \ref{main algo} solves
+        the minimum vertex deletion
+        problem for interval graphs
+        in $\mathcal{O} \left(8^{k} \cdot \left(\left|G\right| + \|G\|\right)\right)$ time.
+        Moreover there exists
+        an $8-\mathcal{O} \left(\left|G\right| \cdot \left(\left|G\right| + \|G\|\right)\right)$
+        approximation scheme of the 
+        same problem.
+    \end{thm}
+
+    \section{Concluding remarks}
+    
+    The strategy used by
+    the algorithm presented in
+    this text that of first
+    computing an olive-ring
+    decomposition or returning
+    a small caw or a short hole;
+    and then
+    stripping the leaves
+    of the olive-ring decomposition
+    and breaking its main cycle.
+
+    When first approaching
+    such algorithm, our
+    goal was to achieve
+    an FPT algorithm and/or an appoximation 
+    scheme similar
+    to the one presented in \cite{main},
+    but relative to the 
+    class of chordal graphs
+    (also known as triangulated graphs),
+    which are more general than
+    interval graphs as they
+    can be characterized as
+    intersection graphs of 
+    a family of subtrees of a given tree,
+    which is a more complex
+    topological object than
+    an interval (see \cite{book}).
+    The idea of computing
+    a clique decomposition
+    of which
+    reflects a
+    normal and Helly circular-arc
+    property of the underlying
+    graph might be
+    useful in the solution
+    of this problem.
+    However, the clique
+    decomposition
+    might be much more
+    involved than an olive-ring.
+    Moreover, the ways
+    to compute such decomposition
+    remains unclear. 
+    Indeed, the algorithm
+    presented in this
+    text, relies heavily
+    on the fact that,
+    whenever we find a small
+    caw, we branch on
+    disposing of it
+    and get a graph
+    with more precise
+    combinatorial properties.
+    The fact that holes
+    are the only minimal
+    obstructions of
+    chordal graphs
+    make the main
+    technical lemmas
+    of \cite{main}
+    useless. The details
+    that need to be filled
+    in order to get
+    efficiently to 
+    a useful clique
+    decomposition thus need
+    some more pondering.
+
+    \printbibliography
+\end{document}
+
