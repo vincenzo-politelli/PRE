@@ -1,6 +1,7 @@
 # Ignore auxiliary LaTeX files
 *.aux
 *.bbl
+*.bcf
 *.blg
 *.brf
 *.fls
