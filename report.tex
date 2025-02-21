@@ -1,6 +1,57 @@
 \documentclass{article}
 
-\usepackage{standalone}
+\ProvidesPackage{standalone}
+
+% format
+\usepackage[a4paper, total={6in, 9in}]{geometry}                            
+
+% math symbols
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[shortlabels]{enumitem} 
+\usepackage{mathtools}
+\usepackage{bbm}
+\usepackage{todonotes}
+
+% figures
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+% theorems
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{exo}[thm]{Exercise}
+
+% definition equal
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\eqdef}{=\vcentcolon}
+
+% bibliography
+\usepackage[backend=biber,style=alphabetic, sorting=ynt]{biblatex}
+
+% url highlight
+\usepackage{hyperref}
+
+% algos
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\SetArgSty{textnormal}
+
+% bullet point style
+\renewcommand{\labelitemi}{\tiny$\blacksquare$}
+
+% new commands
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\Hess}{\textbf{H}}
+\DeclareMathOperator{\Diag}{Diag}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\ind}{i}
+\DeclareMathOperator{\sgn}{sign}
 
 \addbibresource{../ref.bib}
 
