@@ -1,7 +1,5 @@
 \documentclass{article}
 
-\ProvidesPackage{standalone}
-
 % format
 \usepackage[a4paper, total={6in, 9in}]{geometry}                            
 
@@ -20,7 +18,7 @@
 
 % theorems
 \theoremstyle{definition}
-\newtheorem{thm}{Theorem}
+\newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem{lemma}[thm]{Lemma}
 \newtheorem{rmk}[thm]{Remark}
@@ -2130,20 +2128,7 @@
         On the one hand, take $M \defeq K_{l} \cap K_{l+1}$ 
         for $K_{l}$ and $K_{l+1}$ two consecutive
         bags of $\mathcal{K}$. 
-        By the chordlessness property
-        of graphs, for any hole $H$ and
-        any vertex $v$ of $H$, we have
-        that 
-        $v$ is at the intersection of
-        two consecutive bags.
-        Since the the set of bags
-        containing $v$ induces a
-        connected path in $\mathcal{K}$,
-        so a subpath of $\mathcal{K}$,
-        $v$ is also at the
-        intersection of two bags.
-        Moreover,
-        by Proposition \ref{hole prop},
+        By Proposition \ref{hole prop},
         all intersections of consecutive
         cliques contain at least one vertex
         (actually, exactly two) of
