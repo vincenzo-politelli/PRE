@@ -373,8 +373,10 @@
         We first provide an algorithm and then prove its correcteness
         and time complexity.
 
-        \begin{algorithm} \label{forbid subgraph}
+        \begin{algorithm}
             \caption{Minimal forbidden induced subgraph}
+            \label{forbid subgraph}
+
             \KwIn{An graph $G$ and a hereditary property $\mathcal{C}$.}
             \KwOut{An (inclusion-wise) minimal forbidden
             induced subgraph of $G$, otherwise the empty graph.}
@@ -403,8 +405,10 @@
     From this we get that Algorithm \ref{vertex deletion FPT}
     is FPT and solves the vertex deletion problem. 
     
-    \begin{algorithm} \label{vertex deletion FPT}
+    \begin{algorithm}
         \caption{Vertex deletion problem}
+        \label{vertex deletion FPT}
+        
         \SetKw{branch}{branch}
         \SetKw{find}{find}
 
@@ -2175,7 +2179,7 @@
     is minimal.
 
     \section{The algorithm}
-    
+
     We are now ready to
     present the pseudocode
     of the discussed procedure in
@@ -2186,8 +2190,8 @@
     we implicitly branch
     on deleting one vertex of it.
 
-    \begin{algorithm} \label{main algo}
-        \caption{Interval vertex deletion}
+    \begin{algorithm}
+        \caption{Interval vertex deletion}\label{main algo}
 
         \SetKwFunction{IVD}{\texttt{interval\_vertex\_deletion}}
         \SetKwProg{func}{}{}{}
@@ -2301,7 +2305,7 @@
     or a short hole, we delete the whole
     subgraph. When we branch on deleting
     some entire modules at line \ref{most branch}
-    of Algorithm \ref{main algo},
+    of Algorithm~\ref{main algo},
     we only delete exactly one
     vertex from each module of
     the frame $F$ and exactly
